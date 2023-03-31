@@ -1,0 +1,16 @@
+@import 'variables';
+
+/* css vars */
+:root {
+  --primary-color: #01c8b3;
+  --secondary-color: #ff5400;
+  --color-text: #49546b;
+  --dash-background: #2b2f48;
+  --dash-title-color: #424869;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
