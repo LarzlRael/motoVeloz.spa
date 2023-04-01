@@ -12,6 +12,7 @@ import { Loading } from '../../components/loadings/Loading'
 import { H2 } from '../../components/text/H2'
 import { validateStatus } from '../../utils/utils'
 import { postAction } from '../../provider/action/ActionAuthorization'
+import Swal from 'sweetalert2'
 
 export const Login = () => {
   const { isLogged } = useSelector((state: RootState) => state.authSlice)
@@ -27,10 +28,14 @@ export const Login = () => {
         if (validateStatus(res.status)) {
           dispatch(startSession({ token: res.data.token }))
           window.localStorage.setItem('token', res.data.token)
-          /* push('/auth/adminDashboard') */
+          push('/dashboard/listar')
         } else {
           setloading(false)
-          console.log('login fail')
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Usuario o contraseña incorrectos!',
+          })
         }
       })
       .catch((err) => {
@@ -80,7 +85,7 @@ export const Login = () => {
             {loading ? (
               <Loading />
             ) : (
-              <button type="submit" className="button-login">
+              <button type="submit" className="button-login pointer">
                 Iniciar Sesion
               </button>
             )}

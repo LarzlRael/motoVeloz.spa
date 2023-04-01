@@ -82,7 +82,7 @@ export const accountsLink: AccountsLinkInterface[] = [
     items: [
       {
         title: 'Mi cuenta',
-        to: '/admin/profile',
+        to: '/dashboard/account',
         icon: <IoPerson size={25} />,
       },
     ],
@@ -107,7 +107,7 @@ export const accountsLink: AccountsLinkInterface[] = [
     items: [
       {
         title: 'Notificaciones push',
-        to: '/auth/pyme/addPyme',
+        to: '/dashboard/pusNotifications',
         icon: <IoNotificationsSharp size={25} />,
       },
     ],

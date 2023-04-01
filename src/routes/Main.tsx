@@ -9,12 +9,20 @@ import {
 } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { ProtectedRoutes } from './ProtectedRoutes'
 
 export default function Main() {
   return (
     <Router>
       <Routes>
-        <Route path="/dashboard/*" element={<AdminDashBoard />} />
+        <Route
+          path="/dashboard/*"
+          element={
+            <ProtectedRoutes>
+              <AdminDashBoard />
+            </ProtectedRoutes>
+          }
+        ></Route>
         <Route path="/ingresar" element={<Login />} />
       </Routes>
       <ToastContainer />

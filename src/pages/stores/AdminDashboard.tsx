@@ -23,6 +23,8 @@ import './AdminDashboard.scss'
 import { CreateStore } from './CreateStore'
 import { ListStore } from './ListStore'
 import { EditStore } from './EditStore'
+import { PushNotifications } from './PushNotifications'
+import { Account } from '../auth/Account'
 export const AdminDashBoard = () => {
   const { isLogged } = useSelector((state: RootState) => state.authSlice)
   const [openMenu, setOpenMenu] = useState(false)
@@ -92,7 +94,14 @@ export const AdminDashBoard = () => {
 
                 {items.map(({ to, icon, title }, index) => (
                   <div onClick={goToLink} key={index}>
-                    <Link key={uuidv4()} to={to}>
+                    <Link
+                      key={uuidv4()}
+                      to={to}
+                      style={{
+                        textDecoration: 'none',
+                        color: 'inherit',
+                      }}
+                    >
                       <div className="AdminDashBoard__dash--item">
                         {icon}
                         <span
@@ -119,9 +128,12 @@ export const AdminDashBoard = () => {
         </div>
         <div className="dash-content">
           <Routes>
+            <Route path="/" element={<ListStore />} />
             <Route path="crear" element={<CreateStore />} />
+            <Route path="account" element={<Account />} />
             <Route path="listar" element={<ListStore />} />
             <Route path="editarTienda/:id" element={<EditStore />} />
+            <Route path="pusNotifications" element={<PushNotifications />} />
           </Routes>
         </div>
       </div>
