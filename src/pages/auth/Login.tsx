@@ -11,6 +11,7 @@ import { Input } from '../../components/forms/Input'
 import { Loading } from '../../components/loadings/Loading'
 import { H2 } from '../../components/text/H2'
 import { validateStatus } from '../../utils/utils'
+import { postAction } from '../../provider/action/ActionAuthorization'
 
 export const Login = () => {
   const { isLogged } = useSelector((state: RootState) => state.authSlice)
@@ -18,24 +19,14 @@ export const Login = () => {
   const [loading, setloading] = useState(false)
   const push = useNavigate()
 
-  function postAction(url: string, data: any) {
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }).then((res) => res.json())
-  }
-  async function onSubmit({ password, username }: initialValuesI) {
+  async function onSubmit({ password, userName }: initialValuesI) {
     setloading(true)
-
-    postAction('http://localhost:4000/auth/login', { password, username })
+    postAction('auth/login', { password, userName })
       .then((res: any) => {
         setloading(false)
         if (validateStatus(res.status)) {
-          dispatch(startSession({ token: res.data.accessToken }))
-          window.localStorage.setItem('token', res.data.accessToken)
+          dispatch(startSession({ token: res.data.token }))
+          window.localStorage.setItem('token', res.data.token)
           /* push('/auth/adminDashboard') */
         } else {
           setloading(false)
@@ -57,12 +48,12 @@ export const Login = () => {
   }
 
   interface initialValuesI {
-    username: string
+    userName: string
     password: string
   }
   const initialValues = {
-    username: 'larzdosan',
-    password: '123456789',
+    userName: 'gatomon',
+    password: '123456',
   }
   return (
     <div className="Form__container-main animate__animated animate__fadeIn">
@@ -74,7 +65,7 @@ export const Login = () => {
               label=""
               className="Form__input"
               placeholder="Usuario"
-              name="username"
+              name="userName"
               type="text"
               disabled={loading}
             />

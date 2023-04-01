@@ -15,7 +15,7 @@ export default function Main() {
     <Router>
       <Routes>
         <Route path="/dashboard/*" element={<AdminDashBoard />} />
-        <Route path="/ingreso" element={<Login />} />
+        <Route path="/ingresar" element={<Login />} />
       </Routes>
       <ToastContainer />
     </Router>
