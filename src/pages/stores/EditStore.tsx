@@ -9,7 +9,7 @@ import {
   putAction,
   deleteAction,
 } from '../../provider/action/ActionAuthorization'
-import { validateStatus } from '../../utils/utils'
+import { validateStatus, capitalizeFirstLetter } from '../../utils/utils'
 import { toast } from 'react-toastify'
 import { FaEye, FaTrashAlt } from 'react-icons/fa'
 
@@ -91,15 +91,17 @@ export const EditStore = () => {
       ) : (
         <>
           <div className="EditStore__appbar">
-            <H2 color="white">{response.storeName}</H2>
+            <H2 color="white" fontWeight="bold">
+              {response.storeName?.toLocaleUpperCase()}
+            </H2>
             <div>
+              <FaEye size={30} color="white" />
               <FaTrashAlt
                 size={30}
                 color="white"
                 className="pointer"
                 onClick={handleDeleteStore}
               />
-              <FaEye size={30} color="white" />
             </div>
           </div>
           {/* <div onClick={handleDeleteStore}>Eliminar pyme</div> */}
