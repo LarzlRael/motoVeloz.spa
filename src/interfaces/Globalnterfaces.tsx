@@ -4,6 +4,7 @@ export interface GlobalFormInterface {
   data?: any
   formTitle?: string
   loading?: boolean
+  titleButton?: string
 }
 export interface InputJsonI {
   type?: string | 'text' | 'number' | 'email' | 'area' | 'select' | 'checkbox'

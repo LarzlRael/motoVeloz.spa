@@ -10,7 +10,13 @@ import {
   deleteAction,
 } from '../../provider/action/ActionAuthorization'
 import { validateStatus } from '../../utils/utils'
+import { toast } from 'react-toastify'
+import { FaEye, FaTrashAlt } from 'react-icons/fa'
 
+import './EditStore.scss'
+import { H2 } from '../../components/text'
+import { StoreCard } from '../../components/card/StoreCard'
+import Swal from 'sweetalert2'
 export const EditStore = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -26,8 +32,18 @@ export const EditStore = () => {
       .then((res: any) => {
         setLoadingServer(false)
         if (validateStatus(res.status)) {
-          console.log('Editado :D')
           reload()
+          toast.info('Negocio editado correctamente', {
+            position: 'top-right',
+            autoClose: 3500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          })
+          navigate(-1)
         } else {
           setloadingForm(false)
         }
@@ -39,21 +55,34 @@ export const EditStore = () => {
   }
 
   async function handleDeleteStore() {
-    setloadingForm(true)
-    deleteAction(`/stores/${id}`)
-      .then((res: any) => {
-        setLoadingServer(false)
-        if (validateStatus(res.status)) {
-          console.log('Eliminado :D')
-          navigate(-1)
-        } else {
-          setloadingForm(false)
-        }
-      })
-      .catch((err) => {
-        setloadingForm(false)
-        console.log(err)
-      })
+    Swal.fire({
+      title: '¿Estás seguro de Eliminar este negocio?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        setloadingForm(true)
+        deleteAction(`/stores/${id}`)
+          .then((res: any) => {
+            setLoadingServer(false)
+            if (validateStatus(res.status)) {
+              console.log('Eliminado :D')
+              navigate(-1)
+            } else {
+              setloadingForm(false)
+            }
+          })
+          .catch((err) => {
+            setloadingForm(false)
+            console.log(err)
+          })
+      } else if (result.isDenied) {
+        /* Swal.fire('Changes are not saved', '', 'info') */
+      }
+    })
   }
   return (
     <div>
@@ -61,14 +90,37 @@ export const EditStore = () => {
         <Loading />
       ) : (
         <>
-          <div onClick={handleDeleteStore}>Eliminar pyme</div>
-          <GlobalForm
-            data={response}
-            inputJson={storeAddOrEditForm}
-            onSubmit={onSubmit}
-            loading={loadingForm}
-            formTitle="Editar Pyme"
-          />
+          <div className="EditStore__appbar">
+            <H2 color="white">{response.storeName}</H2>
+            <div>
+              <FaTrashAlt
+                size={30}
+                color="white"
+                className="pointer"
+                onClick={handleDeleteStore}
+              />
+              <FaEye size={30} color="white" />
+            </div>
+          </div>
+          {/* <div onClick={handleDeleteStore}>Eliminar pyme</div> */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '1rem',
+              padding: '1.5rem',
+            }}
+          >
+            <GlobalForm
+              data={response}
+              inputJson={storeAddOrEditForm}
+              onSubmit={onSubmit}
+              loading={loadingServer}
+              formTitle="Editar negocio"
+              titleButton="Editar"
+            />
+            <StoreCard store={response} />
+          </div>
         </>
       )}
     </div>

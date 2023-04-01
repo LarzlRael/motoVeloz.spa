@@ -3,9 +3,12 @@ import { storeAddOrEditForm } from '../../data/formsPatterns'
 import { useState } from 'react'
 import { postAction } from '../../provider/action/ActionAuthorization'
 import { validateStatus } from '../../utils/utils'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 export const CreateStore = () => {
   const [loading, setloading] = useState(false)
+  const navigator = useNavigate()
   async function onSubmit(values: any) {
     setloading(true)
 
@@ -13,7 +16,17 @@ export const CreateStore = () => {
       .then((res: any) => {
         setloading(false)
         if (validateStatus(res.status)) {
-          console.log('ok :D')
+          navigator(-1)
+          toast.success('Negocio añadido correctamente!', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          })
         } else {
           setloading(false)
         }
@@ -22,23 +35,25 @@ export const CreateStore = () => {
         setloading(false)
         console.log(err)
       })
-
-    /* if (validateStatus(action.status)) {
-      dispatch(startSession({ token: action.data.token }))
-      window.localStorage.setItem('token', action.data.token.accessToken)
-      push('/auth/adminDashboard')
-    } else {
-      console.log('login fail')
-    } */
   }
+
   return (
     <div>
-      <GlobalForm
-        inputJson={storeAddOrEditForm}
-        onSubmit={onSubmit}
-        formTitle="Registrar Pyme"
-        loading={loading}
-      />
+      <div>
+        <div
+          style={{
+            width: '500px' /* define el ancho del formulario */,
+            margin: '0 auto',
+          }}
+        >
+          <GlobalForm
+            inputJson={storeAddOrEditForm}
+            onSubmit={onSubmit}
+            formTitle="Registrar Negocio"
+            loading={loading}
+          />
+        </div>
+      </div>
     </div>
   )
 }

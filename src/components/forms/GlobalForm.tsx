@@ -21,6 +21,7 @@ export const GlobalForm = ({
   data,
   formTitle,
   loading,
+  titleButton,
 }: GlobalFormInterface) => {
   function initialValueGeneration(
     inputJson: any[],
@@ -111,7 +112,7 @@ export const GlobalForm = ({
             })}
             {!loading ? (
               <button type="submit" className="button-login pointer">
-                Guardar
+                {titleButton ?? 'Guardar'}
               </button>
             ) : (
               <Loading />

@@ -3,11 +3,6 @@ export interface StoreResponseInterface {
   _id:                string;
   createdAt:          Date;
   imageUrl:           string;
-  shopAddress?:       string;
-  shopDescription?:   string;
-  shopName?:          string;
-  shopPhone?:         string;
-  shopPublicImageId?: string;
   storeAddress?:      string;
   storeDescription?:  string;
   storeName?:         string;
