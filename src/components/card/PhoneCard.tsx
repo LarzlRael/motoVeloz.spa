@@ -1,80 +1,192 @@
 import { Formik, Form } from 'formik'
 import './PhoneCard.scss'
 import { Input } from '../forms/Input'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Loading } from '../loadings/Loading'
+import { capitalizeFirstLetter, validateStatus } from '../../utils/utils'
+import {
+  postAction,
+  putAction,
+} from '../../provider/action/ActionAuthorization'
+import * as Yup from 'yup'
+import { Button } from '../Buttons/Button'
+import { FaAccessibleIcon, FaPen } from 'react-icons/fa'
+import { TbSend } from 'react-icons/tb'
 interface PhoneCardProps {
   title?: string
   body?: string
-  image?: string
+  imageUrl: string
+  _id?: string
+  reload?: any
 }
-export const PhoneCard = ({ title, body, image }: PhoneCardProps) => {
+export const PhoneCard = ({
+  title,
+  body,
+  imageUrl,
+  _id,
+  reload,
+}: PhoneCardProps) => {
+  console.log(title, body, imageUrl)
   const [loading, setloading] = useState(false)
   const [formData, setFormData] = useState({
-    title: '',
-    body: '',
+    _id: _id,
+    title: title,
+    body: body,
+    imageUrl: imageUrl,
   })
   const initialValues = {
-    title: 'gatomon',
-    body: '123456',
+    title: formData.title,
+    body: formData.body,
+    imageUrl: formData.imageUrl,
   }
-  function onSubmit({ title, body }: any) {
-    console.log('sednign')
+  useEffect(() => {
+    if (!loading) {
+      setFormData({ ...formData, title, body, imageUrl })
+    }
+  }, [title, body, imageUrl, loading])
+  const timeNow = () => {
+    let date = new Date()
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    return `${hours}:${minutes} ${hours > 12 ? 'PM' : 'AM'}`
+  }
+  function onSubmit(values: any) {
+    console.log(values)
+    setloading(true)
+
+    postAction('/notifications/createNotification', formData)
+      .then((res: any) => {
+        setloading(false)
+        if (validateStatus(res.status)) {
+          console.log('creado :D')
+          reload()
+        } else {
+          console.log('error :(')
+        }
+      })
+      .catch((err) => {
+        setloading(false)
+        console.log('error :(')
+      })
+  }
+  function editNotification() {
+    setloading(true)
+    putAction(`/notifications/updateNotification/${_id}`, formData)
+      .then((res: any) => {
+        setloading(false)
+        if (validateStatus(res.status)) {
+          console.log('editado :D :D')
+          reload()
+        } else {
+          console.log('error :(')
+        }
+      })
+      .catch((err) => {
+        setloading(false)
+        console.log('error :(')
+      })
+  }
+  function onChange(e: any) {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
   return (
-    <>
+    <div className="PhoneCard">
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form className="Form__login">
-          <h3 className="Form__login--title">Iniciar Sesion</h3>
+          <h3 className="Form__login--title">Notificaciones Push</h3>
+          <label className="Form__label--pyme">Titulo de la notificación</label>
           <Input
             label=""
-            className="Form__input"
-            placeholder="Usuario"
-            name="userName"
+            placeholder="Título de la notificación"
+            name="title"
             type="text"
-            onChange={(e: any) => {
-              setFormData({ ...formData, title: e.target.value })
-            }}
+            onChange={onChange}
+            value={initialValues.title}
             disabled={loading}
           />
-          <br />
+          <label className="Form__label--pyme">Texto de la notificación</label>
           <Input
             label=""
-            placeholder="Contraseña"
-            name="cuerpo"
+            placeholder="Contenido de la notificación"
+            name="body"
             type="text"
             disabled={loading}
+            onChange={onChange}
+            value={formData.body}
+          />
+          <label className="Form__label--pyme">
+            Url de la notificación (opcional)
+          </label>
+
+          <Input
+            label=""
+            placeholder="Ejemplo: https://tuapp.com/imagen.png"
+            name="imageUrl"
+            type="text"
+            disabled={loading}
+            onChange={onChange}
+            value={formData.imageUrl}
           />
           {loading ? (
             <Loading />
           ) : (
-            <button type="submit" className="button-login pointer">
-              Guardar
-            </button>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              {_id && (
+                <Button
+                  background="orange"
+                  onClick={editNotification}
+                  icon={<FaPen size="20"/>}
+                >
+                  
+                  Editar Notification
+                </Button>
+              )}
+              <Button
+                background="green"
+                type="submit"
+                icon={<TbSend size={20} />}
+              >
+                Enviar notificación
+              </Button>
+            </div>
           )}
         </Form>
       </Formik>
-      <div className="phone">
-        <div className="phone__top-bar"></div>
-        <div className="phone__screen">
-          <div className="phone__notification">
-            <div className="phone__notification-icon">
-              <img
-                src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4TF1U4JPJXKhTK_3Tue-DZapvvvrEKj239H5dUwHGXw&s'}
-                alt="Notification icon"
-              />
-            </div>
-            <div className="phone__notification-content">
-              <div className="phone__notification-title">
-                {formData.title || 'Titulo de la notificación'}
-              </div>
-              <div className="phone__notification-body">
-                {formData.body || 'Cuerpo de la notificación'}
-              </div>
-            </div>
+      <div className="notification">
+        <div className="notification__header">
+          <img
+            className="notification__logo"
+            src="https://via.placeholder.com/24x24"
+            alt="App Logo"
+          />
+          <span className="notification__title">MotoVeloz</span>
+          <span className="notification__time">{timeNow()}</span>
+        </div>
+
+        <div className="notification__body">
+          <div className="notification__content">
+            <span className="notification__content-title">
+              {capitalizeFirstLetter(formData.title) ||
+                'Titulo de la notificación'}
+            </span>
+
+            <span className="notification__content-text">
+              {capitalizeFirstLetter(formData.body) ||
+                'Contenido de la notificación'}
+            </span>
           </div>
+          <img
+            className="notification__image"
+            src={formData.imageUrl || 'https://via.placeholder.com/100x100'}
+            alt="Notification Image"
+          />
         </div>
       </div>
-    </>
+    </div>
   )
 }

@@ -1,89 +1,72 @@
-.phone {
-  background: #000;
-  width: 350px;
-  height: 700px;
-  border-radius: 20px;
-  border: 15px solid #000;
+
+.PhoneCard{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 16px;
+}
+.notification {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 2px solid #000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+  width: 80%;
+  height: 150px;
+  margin: 0 auto;
+  margin-top: 32px;
+  padding: 16px;
 }
 
-.phone__top-bar {
-  height: 20px;
-  background-color: #000;
-}
-
-.phone__screen {
-  background: #fff;
-  flex-grow: 1;
-  position: relative;
+.notification__header {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.notification__logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.notification__title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.notification__time {
+  font-size: 12px;
+  color: #666;
+}
+
+.notification__body {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.phone__notification {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #fff;
-  display: flex;
-  padding: 20px;
-  border-bottom: 1px solid #e8e8e8;
+.notification__image {
+  width: 80px;
+  height: 80px;
+  margin-right: 16px;
+  border-radius: 8px;
 }
 
-.phone__notification-icon {
-  margin-right: 10px;
-}
-
-.phone__notification-icon img {
-  width: 40px;
-  height: 40px;
-}
-
-.phone__notification-content {
+.notification__content {
   display: flex;
   flex-direction: column;
 }
 
-.phone__notification-title {
-  font-size: 14px;
+.notification__content-title {
+  font-size: 16px;
   font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.phone__notification-body {
-  font-size: 12px;
-  color: #707070;
-  padding-top: 2px;
-}
-
-.phone__buttons {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.phone__button {
-  background: #dcdcdc;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-}
-
-.phone__button--left {
-  margin-right: 20px;
-}
-
-.phone__button--middle {
-  margin: 0 20px;
-}
-
-.phone__button--right {
-  margin-left: 20px;
+.notification__content-text {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
 }
