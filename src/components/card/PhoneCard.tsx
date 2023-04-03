@@ -27,7 +27,6 @@ export const PhoneCard = ({
   _id,
   reload,
 }: PhoneCardProps) => {
-  console.log(title, body, imageUrl)
   const [loading, setloading] = useState(false)
   const [formData, setFormData] = useState({
     _id: _id,
@@ -51,11 +50,25 @@ export const PhoneCard = ({
     let minutes = date.getMinutes()
     return `${hours}:${minutes} ${hours > 12 ? 'PM' : 'AM'}`
   }
-  function onSubmit(values: any) {
-    console.log(values)
+  function onSubmit() {
     setloading(true)
 
     postAction('/notifications/createNotification', formData)
+    .then((res: any) => {
+      setloading(false)
+      if (validateStatus(res.status)) {
+        console.log('creado :D')
+        reload()
+      } else {
+        console.log('error :(')
+      }
+    })
+    .catch((err) => {
+      setloading(false)
+      console.log('error :(')
+    })
+
+    postAction('/notifications/sendNotification', formData)
       .then((res: any) => {
         setloading(false)
         if (validateStatus(res.status)) {
