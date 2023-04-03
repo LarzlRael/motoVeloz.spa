@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import { StoreCard } from '../../components/card/StoreCard'
 
 export const ListStore = () => {
-  const push = useNavigate()
   const { response, loading, reload } = useAxios<StoreResponseInterface[]>({
     url: '/stores',
     method: 'GET',
@@ -26,7 +25,7 @@ export const ListStore = () => {
             gap: '1rem',
           }}
         >
-          {response.map((res,i) => (
+          {response?.map((res, i) => (
             <StoreCard store={res} key={i} />
           ))}
         </div>
