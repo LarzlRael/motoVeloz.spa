@@ -1,9 +1,10 @@
 import { TableHeaderI } from '../../interfaces/tableInterfaces'
 import ToolTip from '../boxex/ToolTip'
-import { validateArray } from '../../utils/validation/validation'
+
 import { convertD } from '../../utils/convertDate'
 import { processUrlImage } from '../../utils/processData'
 import { DefaultBtn, RenderButton } from '../Buttons/'
+import { validateArray } from '../../utils/validation/validation'
 interface DataTypeProps {
   [key: string]: any
   a: TableHeaderI
@@ -51,7 +52,11 @@ const DataType = ({ a, head, reload }: DataTypeProps) => {
         </div>
       )
     case 'date':
-      return <div>{head[a.key] ? convertD(head[a.key], 'LLL') : '--'}</div>
+      return (
+        <div>
+          {head[a.key] ? convertD(head[a.key], 'LLL')?.toLocaleString() : '--'}
+        </div>
+      )
     case 'actions':
       return (
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'start' }}>

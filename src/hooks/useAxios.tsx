@@ -9,7 +9,7 @@ const useAxios = <T extends object>(axiosParams: AxiosRequestConfig) => {
   const [response, setResponse] = useState<T>((null as unknown) as T)
   const [error, setError] = useState<any>('')
   const [loading, setLoading] = useState(true)
-  const [header, setheader] = useState<AxiosResponseHeaders>()
+  const [header, setheader] = useState<any>()
   const fetchData = async () => {
     try {
       const result = axiosParams?.url

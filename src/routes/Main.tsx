@@ -22,8 +22,9 @@ export default function Main() {
               <AdminDashBoard />
             </ProtectedRoutes>
           }
-        ></Route>
+        />
         <Route path="/ingresar" element={<Login />} />
+        <Route path="/" element={<Login />} />
       </Routes>
       <ToastContainer />
     </Router>

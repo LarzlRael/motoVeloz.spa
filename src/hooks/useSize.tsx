@@ -18,7 +18,7 @@ const useSize = () => {
     setCurrentSize({ width, height })
   }
 
-  const target = useCallback((element) => {
+  const target = useCallback((element: any) => {
     if (element) {
       observer.current = new ResizeObserver(getSize).observe(element)
     }
@@ -32,7 +32,7 @@ const useSize = () => {
     }
   }, [])
 
-  return {target, currentSize}
+  return { target, currentSize }
 }
 
 export default useSize

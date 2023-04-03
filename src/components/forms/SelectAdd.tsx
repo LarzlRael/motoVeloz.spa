@@ -1,11 +1,13 @@
 import React from 'react'
 import { Field, FieldArray, useField } from 'formik'
 import { socialNetworks } from '../../data/infoData'
-import BoxFlex from '../boxes/BoxFlex'
+
 import { FaTimesCircle, FaPlusCircle } from 'react-icons/fa'
-import { Button } from '../buttons/Button'
-import { RedesSociales } from '../../interfaces/pymesResponseInterface'
+
 import { Label } from '../text'
+import { Button } from '../Buttons'
+import BoxFlex from '../boxex/BoxFlex'
+import { RedesSociales } from '../../interfaces/ResponseInterfaces'
 interface Props {
   label: string
   name: string

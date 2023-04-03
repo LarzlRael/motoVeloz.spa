@@ -12,3 +12,8 @@ export interface StoreResponseInterface {
   updatedAt:          Date;
  }
  
+ export interface RedesSociales {
+  _id:          string;
+  nombre:       string;
+  urlRedSocial: string;
+}

@@ -1,7 +1,8 @@
 import { useField, ErrorMessage } from 'formik'
 import React, { useState } from 'react'
-import { OptionsI } from '../../interfaces/globalFormInterface'
+
 import { Label } from '../text'
+import { OptionsI } from '../../data/infoData';
 interface Props {
   label: string
   name: string

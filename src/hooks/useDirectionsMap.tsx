@@ -5,7 +5,7 @@ export const useDirectionsMap = (
   latitude: number,
   zoom = 16,
 ) => {
-  const mapboxglAccessToken = process.env.NEXT_PUBLIC_MAPBOX_KEY
+  const mapboxglAccessToken = import.meta.env.VITE_SERVER_URL
 
   const [viewport, setViewport] = useState({
     /* -16.534593, -68.190434 */
