@@ -50,7 +50,9 @@ export const GlobalForm = ({
   const validationSchema = Yup.object(validate)
   return (
     <div>
-      <H2>{formTitle}</H2>
+      <H2 margin="1rem 0" color="var(--color-text)" fontWeight="600">
+        {formTitle}
+      </H2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

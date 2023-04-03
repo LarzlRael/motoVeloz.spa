@@ -20,6 +20,7 @@ import { RootState } from '../../store/store'
 import { logOutSession } from '../../store/slices/slices'
 
 import './AdminDashboard.scss'
+import '../../styles/_media.scss'
 import { CreateStore } from './CreateStore'
 import { ListStore } from './ListStore'
 import { EditStore } from './EditStore'
@@ -53,7 +54,7 @@ export const AdminDashBoard = () => {
     }
   }, [isLogged])
  */
-  useDocumentTitle('dashboard')
+  useDocumentTitle('Adminstracion')
 
   const goToLink = () => {
     if (windowSize.width < 768) {

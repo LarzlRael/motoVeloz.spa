@@ -89,7 +89,7 @@ export const EditStore = () => {
       {loading ? (
         <Loading />
       ) : (
-        <>
+        <div className="EditStore__container">
           <div className="EditStore__appbar">
             <H2 color="white" fontWeight="bold">
               {response.storeName?.toLocaleUpperCase()}
@@ -105,14 +105,7 @@ export const EditStore = () => {
             </div>
           </div>
           {/* <div onClick={handleDeleteStore}>Eliminar pyme</div> */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '1rem',
-              padding: '1.5rem',
-            }}
-          >
+          <div className="EditStore__form--container">
             <GlobalForm
               data={response}
               inputJson={storeAddOrEditForm}
@@ -123,7 +116,7 @@ export const EditStore = () => {
             />
             <StoreCard store={response} />
           </div>
-        </>
+        </div>
       )}
     </div>
   )

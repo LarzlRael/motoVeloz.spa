@@ -6,7 +6,7 @@ import { deleteAction } from '../../provider/action/ActionAuthorization'
 import TableMain from '../../components/table/TableMain'
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
-
+import './PushNotification.scss'
 export const PushNotifications = () => {
   const { response, loading, reload } = useAxiosAuth<any>({
     method: 'GET',
@@ -53,40 +53,40 @@ export const PushNotifications = () => {
   }
 
   return (
-    <div style={{
-      padding: '1rem',
-    }}>
+    <div className="PushNotificacion__container">
       <h3 className="Form__login--title">Notificaciones Push</h3>
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <TableMain
-          header={[
-            { key: 'title', name: 'Titulo' },
-            { key: 'body', name: 'Contenido de la aplicación' },
+        <div className="PushNotificacion__container">
+          <TableMain
+            header={[
+              { key: 'title', name: 'Titulo' },
+              { key: 'body', name: 'Contenido de la aplicación' },
 
-            { key: 'createdAt', name: 'Creado en ', type: 'date' },
-            /* { key: 'imageUrl', name: 'Creado en ', type: 'img' }, */
-            {
-              key: 'action',
-              name: 'Acciones',
-              type: 'actions',
-              actions: [
-                {
-                  labelTooltip: 'Eliminar notificación',
-                  action: (e) => {
-                    handleDleteNotification(e._id)
+              { key: 'createdAt', name: 'Creado en ', type: 'date' },
+              /* { key: 'imageUrl', name: 'Creado en ', type: 'img' }, */
+              {
+                key: 'action',
+                name: 'Acciones',
+                type: 'actions',
+                actions: [
+                  {
+                    labelTooltip: 'Eliminar notificación',
+                    action: (e) => {
+                      handleDleteNotification(e._id)
+                    },
+                    icon: <FaTrash color="#f44336" size={20} />,
                   },
-                  icon: <FaTrash color="#f44336" size={20}/>,
-                },
-              ],
-            },
-          ]}
-          main={response}
-          handleInfo={selecteNotificationHandler}
-        />
+                ],
+              },
+            ]}
+            main={response}
+            handleInfo={selecteNotificationHandler}
+          />
+          <PhoneCard {...selecteNotification} reload={reload} />
+        </div>
       )}
-      <PhoneCard {...selecteNotification} reload={reload} />
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Formik, Form, Field } from 'formik'
-/* import { postAction } from '../../src/provider/action/action' */
 
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store/store'
@@ -14,7 +13,7 @@ import { validateStatus } from '../../utils/utils'
 import { postAction } from '../../provider/action/ActionAuthorization'
 import Swal from 'sweetalert2'
 import { appLogo, appName } from '../../data/constants'
-
+import './../../styles/_media.scss'
 import { Button } from '../../components/Buttons/Button'
 export const Login = () => {
   const { isLogged } = useSelector((state: RootState) => state.authSlice)
@@ -23,6 +22,13 @@ export const Login = () => {
   const push = useNavigate()
 
   async function onSubmit({ password, userName }: initialValuesI) {
+    if (password === '' || userName === '') {
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'LLene todos los campos!',
+      })
+    }
     setloading(true)
     postAction('auth/login', { password, userName })
       .then((res: any) => {
@@ -33,7 +39,7 @@ export const Login = () => {
           push('/dashboard/listar')
         } else {
           setloading(false)
-          Swal.fire({
+          return Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Usuario o contraseña incorrectos!',
@@ -44,14 +50,6 @@ export const Login = () => {
         setloading(false)
         console.log(err)
       })
-
-    /* if (validateStatus(action.status)) {
-      dispatch(startSession({ token: action.data.token }))
-      window.localStorage.setItem('token', action.data.token.accessToken)
-      push('/auth/adminDashboard')
-    } else {
-      console.log('login fail')
-    } */
   }
 
   interface initialValuesI {
@@ -71,24 +69,24 @@ export const Login = () => {
             <img className="Form__login--logo" src={appLogo} alt="" />
             <h3 className="Form__login--title">Iniciar Sesion</h3>
             <label className="Form__label--pyme" htmlFor="">
-              Ingrese su usuario o email
+              Usuario
             </label>
             <Input
               label=""
               className="Form__input--pyme"
-              placeholder="Usuario"
+              placeholder="Ingrese su usuario o email"
               name="userName"
               type="text"
               disabled={loading}
             />
             <br />
             <label className="Form__label--pyme" htmlFor="">
-              Ingrese su contraseña
+              Contraseña
             </label>
             <Input
               label=""
               className="Form__input--pyme"
-              placeholder="Contraseña"
+              placeholder="Ingrese su contraseña"
               name="password"
               type="password"
               disabled={loading}
@@ -100,8 +98,8 @@ export const Login = () => {
                 background="var(--secondary-color)"
                 type="submit"
                 className="button-login pointer"
-                margin='1rem 0'
-                borderRadius='20px'
+                margin="1rem 0"
+                borderRadius="20px"
               >
                 Iniciar Sesion
               </Button>

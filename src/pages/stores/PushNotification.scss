@@ -1,0 +1,10 @@
+.PushNotificacion__container {
+  width: 100%;
+  padding: 1rem;
+}
+
+@media (max-width: 420px) {
+  .PushNotificacion__container {
+    padding: 0.5rem;
+  }
+}

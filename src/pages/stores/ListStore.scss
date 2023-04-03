@@ -1,0 +1,13 @@
+@media (min-width: 420px) {
+  .ListStore__container {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+.ListStore__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+}

@@ -10,19 +10,22 @@
     width: 100%;
     margin-top: 1rem;
   } */
+
   .Form__container {
     display: flex;
     width: 400px;
 
     box-shadow: 0px 0px 9px 1px rgba(160, 145, 147, 1);
     margin: auto;
-    /*  @include media(sm) {
-      height: 100vh;
-    } */
 
     .Form__login {
       width: 100%;
       padding: 2.5rem;
+
+      @media (max-width: 420px) {
+        padding: 1rem;
+      }
+
       .Form__login--title {
         text-align: center;
         font-size: 1.5rem;
@@ -130,6 +133,10 @@
     grid-template-columns: 1fr;
     position: relative;
   } */
+  @media (max-width: 420px) {
+    grid-template-columns: 1fr;
+    position: relative;
+  }
 }
 .AdminDashBoard__dash {
   background: var(--dash-background);
@@ -143,12 +150,13 @@
     // display: none;
     transform: translate(0%);
   }
-
-  /* @include media(sm) {
+  @media (max-width: 420px) {
     position: absolute;
     z-index: 100;
     width: 70%;
     height: 100vh;
+  }
+  /* @include media(sm) {
   } */
 }
 
@@ -308,6 +316,7 @@ input[type='file'] {
     display: flex;
   }
  */
+
   color: white;
   width: 100%;
   background-color: var(--dash-background);
@@ -346,7 +355,7 @@ input[type='file'] {
   font-size: 0.9rem;
   color: #424869;
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
 }
 .Form__input--textarea {
   display: inline-block;
@@ -411,4 +420,23 @@ input:checked + .slide:before {
 }
 .slide.round:before {
   border-radius: 50%;
+}
+
+@media (max-width: 420px) {
+  .toolbar {
+    display: flex;
+  }
+  .Form__input--pyme {
+    margin: 0;
+    background-color: #f2f2f2;
+  }
+  .Form__label--pyme {
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
+  }
+  .Form__container-main .Form__container {
+    width: 90%;
+    padding: 0.5rem;
+    box-shadow: none;
+  }
 }

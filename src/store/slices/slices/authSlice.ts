@@ -21,7 +21,6 @@ export const authSlice = createSlice({
       state.user = action.payload
     },
     logOutSession: (state) => {
-      console.log('logout')
       localStorage.removeItem('token')
       state.isLogged = false
     },

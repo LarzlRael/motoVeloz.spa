@@ -5,7 +5,7 @@ import { postAction } from '../../provider/action/ActionAuthorization'
 import { validateStatus } from '../../utils/utils'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-
+import './EditStore.scss'
 export const CreateStore = () => {
   const [loading, setloading] = useState(false)
   const navigator = useNavigate()
@@ -40,12 +40,7 @@ export const CreateStore = () => {
   return (
     <div>
       <div>
-        <div
-          style={{
-            width: '500px' /* define el ancho del formulario */,
-            margin: '0 auto',
-          }}
-        >
+        <div className="CreateStore__form--container">
           <GlobalForm
             inputJson={storeAddOrEditForm}
             onSubmit={onSubmit}
