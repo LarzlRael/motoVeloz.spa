@@ -1,12 +1,8 @@
 .Form__container-main {
   display: flex;
-  width: 65%;
-  margin: auto;
-  margin-top: 5rem;
-  height: 500px;
-  -webkit-box-shadow: -2px 6px 9px 4px rgba(160, 145, 147, 1);
-  -moz-box-shadow: -2px 6px 9px 4px rgba(160, 145, 147, 1);
-  box-shadow: -2px 6px 9px 1px rgba(160, 145, 147, 1);
+
+  width: 100vw;
+  height: 100vh;
 
   /* @include media(sm) {
     flex-direction: column-reverse;
@@ -16,22 +12,22 @@
   } */
   .Form__container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    width: 400px;
+
+    box-shadow: 0px 0px 9px 1px rgba(160, 145, 147, 1);
+    margin: auto;
     /*  @include media(sm) {
       height: 100vh;
     } */
 
     .Form__login {
       width: 100%;
-      padding: 2rem;
+      padding: 2.5rem;
       .Form__login--title {
         text-align: center;
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         font-weight: 800;
-        margin: 1rem 0;
-        letter-spacing: 4px;
+        margin: 1.5rem 0;
         color: var(--secondary-color);
         text-transform: uppercase;
       }
@@ -56,30 +52,12 @@
         }
       }
     }
-    .button-login {
+    .Form__login--logo {
       display: block;
-      width: 50%;
-      color: #000;
-      margin-top: 1rem;
-      padding: 1rem;
-      margin: 1.5rem auto 0px auto;
-      background-color: var(--secondary-color);
-      color: white;
-      outline: none;
-      border: none;
-      border-radius: 2rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      transition: 0.3s all ease;
-
-      &:hover {
-        // background-color: $dash-title-color;
-        /* background-color: darken($color: var(--secondary-color), $amount: 15); */
-      }
-      /*       @include media(sm) {
-        width: 100%;
-        margin-bottom: 2rem;
-      } */
+      width: 100px;
+      height: 100px;
+      margin: auto;
+      border-radius: 10px;
     }
   }
   .Form__info-login {
@@ -121,7 +99,7 @@
   color: #000;
   margin-top: 1rem;
   padding: 1rem;
-  margin: 1.5rem auto 0px auto;
+  margin: 1.5rem auto;
   background-color: var(--secondary-color);
   color: white;
   outline: none;
@@ -360,10 +338,15 @@ input[type='file'] {
   border-radius: 5px;
   margin: 0.5rem 0;
 }
+.Form__input--pyme:focus {
+  outline: none;
+  border: 1.5px solid var(--secondary-color);
+}
 .Form__label--pyme {
   font-size: 0.9rem;
   color: #424869;
   display: block;
+  margin-bottom: 0.5rem;
 }
 .Form__input--textarea {
   display: inline-block;

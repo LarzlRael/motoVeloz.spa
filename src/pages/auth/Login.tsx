@@ -13,7 +13,9 @@ import { H2 } from '../../components/text/H2'
 import { validateStatus } from '../../utils/utils'
 import { postAction } from '../../provider/action/ActionAuthorization'
 import Swal from 'sweetalert2'
-
+import { appName } from '../../data/constants'
+import LogoApp from '../../../public/moto_veloz_logo.jpeg'
+import { Button } from '../../components/Buttons/Button'
 export const Login = () => {
   const { isLogged } = useSelector((state: RootState) => state.authSlice)
   const dispatch = useDispatch()
@@ -65,18 +67,27 @@ export const Login = () => {
       <div className="Form__container animate__animated animate__fadeInUp">
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
           <Form className="Form__login">
+            <h3 className="Form__login--title">{appName}</h3>
+            <img className="Form__login--logo" src={LogoApp} alt="" />
             <h3 className="Form__login--title">Iniciar Sesion</h3>
+            <label className="Form__label--pyme" htmlFor="">
+              Ingrese su usuario o email
+            </label>
             <Input
               label=""
-              className="Form__input"
+              className="Form__input--pyme"
               placeholder="Usuario"
               name="userName"
               type="text"
               disabled={loading}
             />
             <br />
+            <label className="Form__label--pyme" htmlFor="">
+              Ingrese su contraseña
+            </label>
             <Input
               label=""
+              className="Form__input--pyme"
               placeholder="Contraseña"
               name="password"
               type="password"
@@ -85,22 +96,18 @@ export const Login = () => {
             {loading ? (
               <Loading />
             ) : (
-              <button type="submit" className="button-login pointer">
+              <Button
+                background="var(--secondary-color)"
+                type="submit"
+                className="button-login pointer"
+                margin='1rem 0'
+                borderRadius='20px'
+              >
                 Iniciar Sesion
-              </button>
+              </Button>
             )}
           </Form>
         </Formik>
-      </div>
-      <div className="Form__info-login animate__animated animate__fadeInDown">
-        <H2 margin="0.5rem 0" color="white" fontSize="2rem">
-          MotoVeloz
-        </H2>
-        <span>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. A qui ipsam
-          numquam dolore quo, aperiam voluptates labore, error totam rem hic,
-          minus incidunt autem nesciunt ea laborum temporibus enim tempora.
-        </span>
       </div>
     </div>
   )
