@@ -8,10 +8,11 @@ import {
   postAction,
   putAction,
 } from '../../provider/action/ActionAuthorization'
-import * as Yup from 'yup'
+import LogoApp from '../../../public/moto_veloz_logo.jpeg'
 import { Button } from '../Buttons/Button'
 import { FaAccessibleIcon, FaPen } from 'react-icons/fa'
 import { TbSend } from 'react-icons/tb'
+import { appName } from '../../data/constants'
 interface PhoneCardProps {
   title?: string
   body?: string
@@ -115,7 +116,7 @@ export const PhoneCard = ({
             value={formData.body}
           />
           <label className="Form__label--pyme">
-            Url de la notificación (opcional)
+            Image de la notificación (opcional)
           </label>
 
           <Input
@@ -140,9 +141,8 @@ export const PhoneCard = ({
                 <Button
                   background="orange"
                   onClick={editNotification}
-                  icon={<FaPen size="20"/>}
+                  icon={<FaPen size="20" />}
                 >
-                  
                   Editar Notification
                 </Button>
               )}
@@ -159,12 +159,8 @@ export const PhoneCard = ({
       </Formik>
       <div className="notification">
         <div className="notification__header">
-          <img
-            className="notification__logo"
-            src="https://via.placeholder.com/24x24"
-            alt="App Logo"
-          />
-          <span className="notification__title">MotoVeloz</span>
+          <img className="notification__logo" src={LogoApp} alt="App Logo" />
+          <span className="notification__title">{appName}</span>
           <span className="notification__time">{timeNow()}</span>
         </div>
 
