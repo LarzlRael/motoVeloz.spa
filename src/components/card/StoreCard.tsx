@@ -23,6 +23,7 @@ export const StoreCard = ({
   function handleGo() {
     navigate(`/dashboard/editarTienda/${_id}`)
   }
+  console.log(storeUrl)
   const renderImage = imageUrl
     ? imageUrl
     : 'https://www.abc.net.au/news/image/12000000'
@@ -46,6 +47,8 @@ export const StoreCard = ({
             wordWrap: 'break-word',
           }}
           href={storeUrl}
+          target="_blank"
+          rel="noreferrer"
         >
           {storeUrl.length > 30 ? storeUrl.slice(0, 35) + '...' : storeUrl}
         </a>

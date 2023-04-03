@@ -57,8 +57,8 @@ export const Login = () => {
     password: string
   }
   const initialValues = {
-    userName: 'gatomon',
-    password: '123456',
+    userName: 'rockerOscar',
+    password: 'motoVeloz23',
   }
   return (
     <div className="Form__container-main animate__animated animate__fadeIn">

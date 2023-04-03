@@ -40,7 +40,7 @@ export const storeAddOrEditForm: InputJsonI[] = [
     placeholder: 'Ingrese la url de la tienda',
     label: 'URL de la tienda',
     initialValue: '',
-    validate: Yup.string().required('Campo requerido').url('URL invalida'),
+    validate: Yup.string().required('Campo requerido')
   },
   {
     type: 'url',
