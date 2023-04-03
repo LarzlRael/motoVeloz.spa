@@ -13,8 +13,8 @@ import { H2 } from '../../components/text/H2'
 import { validateStatus } from '../../utils/utils'
 import { postAction } from '../../provider/action/ActionAuthorization'
 import Swal from 'sweetalert2'
-import { appName } from '../../data/constants'
-import LogoApp from '../../../public/moto_veloz_logo.jpeg'
+import { appLogo, appName } from '../../data/constants'
+
 import { Button } from '../../components/Buttons/Button'
 export const Login = () => {
   const { isLogged } = useSelector((state: RootState) => state.authSlice)
@@ -68,7 +68,7 @@ export const Login = () => {
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
           <Form className="Form__login">
             <h3 className="Form__login--title">{appName}</h3>
-            <img className="Form__login--logo" src={LogoApp} alt="" />
+            <img className="Form__login--logo" src={appLogo} alt="" />
             <h3 className="Form__login--title">Iniciar Sesion</h3>
             <label className="Form__label--pyme" htmlFor="">
               Ingrese su usuario o email

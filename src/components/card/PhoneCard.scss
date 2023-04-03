@@ -1,8 +1,6 @@
-
-.PhoneCard{
+.PhoneCard {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 16px;
 }
 .notification {
   display: flex;
@@ -20,7 +18,7 @@
 
 .notification__header {
   display: flex;
-  
+
   align-items: center;
   margin-bottom: 8px;
 }

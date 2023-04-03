@@ -8,11 +8,12 @@ import {
   postAction,
   putAction,
 } from '../../provider/action/ActionAuthorization'
-import LogoApp from '../../../public/moto_veloz_logo.jpeg'
 import { Button } from '../Buttons/Button'
 import { FaAccessibleIcon, FaPen } from 'react-icons/fa'
 import { TbSend } from 'react-icons/tb'
-import { appName } from '../../data/constants'
+import { appLogo, appName } from '../../data/constants'
+import { toast } from 'react-toastify'
+import Swal from 'sweetalert2'
 interface PhoneCardProps {
   title?: string
   body?: string
@@ -52,21 +53,56 @@ export const PhoneCard = ({
   }
   function onSubmit() {
     setloading(true)
+    if (formData.title === '' || formData.body === '') {
+      setloading(false)
+      return Swal.fire({
+        icon: 'error',
+        title: 'Por favor llene los campos requeridos',
+        text: 'Titulo y cuerpo de la notificacion son requeridos',
+      })
+    }
 
     postAction('/notifications/createNotification', formData)
-    .then((res: any) => {
-      setloading(false)
-      if (validateStatus(res.status)) {
-        console.log('creado :D')
-        reload()
-      } else {
-        console.log('error :(')
-      }
-    })
-    .catch((err) => {
-      setloading(false)
-      console.log('error :(')
-    })
+      .then((res: any) => {
+        setloading(false)
+        if (validateStatus(res.status)) {
+          toast.success('Notificacion enviada correctamente', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          })
+          reload()
+        } else {
+          toast.error('Hubo un error al enviar la notificacion', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          })
+        }
+      })
+      .catch((err) => {
+        setloading(false)
+        toast.error('Hubo un error al enviar la notificacion', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        })
+      })
 
     postAction('/notifications/sendNotification', formData)
       .then((res: any) => {
@@ -89,15 +125,42 @@ export const PhoneCard = ({
       .then((res: any) => {
         setloading(false)
         if (validateStatus(res.status)) {
-          console.log('editado :D :D')
+          toast.info('Notificación editada correctamente', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          })
           reload()
         } else {
-          console.log('error :(')
+          toast.error('Notificación editada correctamente', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'colored',
+          })
         }
       })
       .catch((err) => {
         setloading(false)
-        console.log('error :(')
+        toast.error('Notificación editada correctamente', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+        })
       })
   }
   function onChange(e: any) {
@@ -107,7 +170,8 @@ export const PhoneCard = ({
     <div className="PhoneCard">
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         <Form className="Form__login">
-          <h3 className="Form__login--title">Notificaciones Push</h3>
+          <h3 className="Form__login--title">Crear nueva notificacion push</h3>
+          <br />
           <label className="Form__label--pyme">Titulo de la notificación</label>
           <Input
             label=""
@@ -172,7 +236,7 @@ export const PhoneCard = ({
       </Formik>
       <div className="notification">
         <div className="notification__header">
-          <img className="notification__logo" src={LogoApp} alt="App Logo" />
+          <img className="notification__logo" src={appLogo} alt="App Logo" />
           <span className="notification__title">{appName}</span>
           <span className="notification__time">{timeNow()}</span>
         </div>
