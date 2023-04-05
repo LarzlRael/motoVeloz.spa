@@ -1,4 +1,5 @@
-import { IoPerson, IoHammer } from 'react-icons/io5'
+import { IoPerson } from 'react-icons/io5'
+import { BsHouseAddFill } from 'react-icons/bs'
 import { BiStoreAlt } from 'react-icons/bi'
 import { IoNotificationsSharp } from 'react-icons/io5'
 
@@ -93,7 +94,7 @@ export const accountsLink: AccountsLinkInterface[] = [
       {
         title: 'Agregar tienda',
         to: '/dashboard/crear',
-        icon: <BiStoreAlt size={25} />,
+        icon: <BsHouseAddFill size={25} />,
       },
       {
         title: 'Listar tiendas',

@@ -14,6 +14,9 @@ import { TbSend } from 'react-icons/tb'
 import { appLogo, appName } from '../../data/constants'
 import { toast } from 'react-toastify'
 import Swal from 'sweetalert2'
+import useAxiosAuth from '../../hooks/useAxiosAuth'
+import DropzoneInput from '../DragNDrop/DragZone'
+import { processFormAppendData } from '../../utils/processData'
 interface PhoneCardProps {
   title?: string
   body?: string
@@ -29,6 +32,12 @@ export const PhoneCard = ({
   reload,
 }: PhoneCardProps) => {
   const [loading, setloading] = useState(false)
+  const [file, setFile] = useState<any>()
+  const { response, loading: storeLoading } = useAxiosAuth<any>({
+    method: 'GET',
+    url: '/stores/getNamesAndUrl',
+  })
+
   const [formData, setFormData] = useState({
     _id: _id,
     title: title,
@@ -49,9 +58,12 @@ export const PhoneCard = ({
     let date = new Date()
     let hours = date.getHours()
     let minutes = date.getMinutes()
-    return `${hours}:${minutes} ${hours > 12 ? 'PM' : 'AM'}`
+    return `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${
+      hours > 12 ? 'PM' : 'AM'
+    }`
   }
   function onSubmit() {
+    console.log(file.image)
     setloading(true)
     if (formData.title === '' || formData.body === '') {
       setloading(false)
@@ -62,7 +74,13 @@ export const PhoneCard = ({
       })
     }
 
-    postAction('/notifications/createNotification', formData)
+    postAction(
+      '/notifications/createNotification',
+      processFormAppendData({
+        ...formData,
+        image: file.image,
+      }),
+    )
       .then((res: any) => {
         setloading(false)
         if (validateStatus(res.status)) {
@@ -102,21 +120,6 @@ export const PhoneCard = ({
           progress: undefined,
           theme: 'colored',
         })
-      })
-
-    postAction('/notifications/sendNotification', formData)
-      .then((res: any) => {
-        setloading(false)
-        if (validateStatus(res.status)) {
-          console.log('creado :D')
-          reload()
-        } else {
-          console.log('error :(')
-        }
-      })
-      .catch((err) => {
-        setloading(false)
-        console.log('error :(')
       })
   }
   function editNotification() {
@@ -195,7 +198,6 @@ export const PhoneCard = ({
           <label className="Form__label--pyme">
             Image de la notificación (opcional)
           </label>
-
           <Input
             label=""
             placeholder="Ejemplo: https://tuapp.com/imagen.png"
@@ -205,6 +207,40 @@ export const PhoneCard = ({
             onChange={onChange}
             value={formData.imageUrl}
           />
+          {storeLoading ? (
+            <Loading />
+          ) : (
+            <>
+              <label className="Form__label--pyme">
+                O puedes escoger una imagen de tu tienda
+              </label>
+              <select
+                disabled={loading}
+                name="imageUrl"
+                onChange={onChange}
+                value={formData.imageUrl}
+                className="Form__select"
+              >
+                {[
+                  {
+                    imageUrl: '',
+                    storeName: 'Selecciona una imagen',
+                  },
+                  ...response,
+                ].map((store: any) => (
+                  <option value={store.imageUrl} key={store.storeName}>
+                    {capitalizeFirstLetter(store.storeName)}
+                  </option>
+                ))}
+              </select>
+              <DropzoneInput
+                label="Subir Imagen"
+                name="image"
+                uploadFiles={setFile}
+              />
+            </>
+          )}
+
           {loading ? (
             <Loading />
           ) : (
@@ -255,7 +291,8 @@ export const PhoneCard = ({
           </div>
           <img
             className="notification__image"
-            src={formData.imageUrl || 'https://via.placeholder.com/100x100'}
+            src={formData.imageUrl || 
+              'https://via.placeholder.com/100x100'}
             alt="Notification Image"
           />
         </div>

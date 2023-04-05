@@ -142,13 +142,12 @@
   background: var(--dash-background);
   color: white;
   transition: 0.4s ease all;
-  &.open-menu {
+  &.opened-menu {
     // display: grid;
-    transform: translate(-150%);
-  }
-  &.close-menu {
-    // display: none;
     transform: translate(0%);
+  }
+  &.closed-menu {
+    transform: translate(-150%);
   }
   @media (max-width: 420px) {
     position: absolute;
@@ -190,7 +189,7 @@
 }
 .title-dash {
   padding: 1.5rem;
-  color: #424869;
+  color: var(--dash-title-color);
   font-weight: 400;
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -422,9 +421,18 @@ input:checked + .slide:before {
   border-radius: 50%;
 }
 
+.toolbar__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  text-transform: uppercase;
+  margin-left: 1rem;
+}
+
 @media (max-width: 420px) {
   .toolbar {
     display: flex;
+    align-items: center;
   }
   .Form__input--pyme {
     margin: 0;
@@ -436,7 +444,12 @@ input:checked + .slide:before {
   }
   .Form__container-main .Form__container {
     width: 90%;
+    height: 100%;
     padding: 0.5rem;
     box-shadow: none;
+  }
+  .toolbar__title {
+    font-size: 1rem;
+    font-weight: bold !important;
   }
 }

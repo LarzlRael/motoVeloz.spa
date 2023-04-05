@@ -82,3 +82,14 @@
   text-align: end;
   font-size: 0.9rem;
 }
+@media (max-width: 420px) {
+  .TableDefault__column .TableDefault__head {
+    font-size: 1rem;
+  }
+  .TableDefault__cell {
+    padding: 0;
+  }
+  .TableDefault__cell > div {
+    padding: 0.5rem 0 ;
+  }
+}

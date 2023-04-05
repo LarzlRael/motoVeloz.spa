@@ -17,18 +17,23 @@ import './EditStore.scss'
 import { H2 } from '../../components/text'
 import { StoreCard } from '../../components/card/StoreCard'
 import Swal from 'sweetalert2'
+import BoxFlex from '../../components/boxex/BoxFlex'
+import DropzoneInput from '../../components/DragNDrop/DragZone'
+import { Button } from '../../components/Buttons'
+import { processFormAppendData } from '../../utils/processData'
 export const EditStore = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const [files, setFilesToSend] = useState<any>()
   const [loadingServer, setLoadingServer] = useState(false)
   const { response, loading, reload } = useAxios<StoreResponseInterface>({
     url: `stores/${id}`,
     method: 'GET',
   })
-  const [loadingForm, setloadingForm] = useState(false)
+
   async function onSubmit(values: any) {
     setLoadingServer(true)
-    putAction(`/stores/${id}`, values)
+    putAction(`/stores/${id}`, processFormAppendData(values))
       .then((res: any) => {
         setLoadingServer(false)
         if (validateStatus(res.status)) {
@@ -43,13 +48,13 @@ export const EditStore = () => {
             progress: undefined,
             theme: 'colored',
           })
-          navigate(-1)
+          /* navigate(-1) */
         } else {
-          setloadingForm(false)
+          setLoadingServer(false)
         }
       })
       .catch((err) => {
-        setloadingForm(false)
+        setLoadingServer(false)
         console.log(err)
       })
   }
@@ -64,7 +69,7 @@ export const EditStore = () => {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        setloadingForm(true)
+        setLoadingServer(true)
         deleteAction(`/stores/${id}`)
           .then((res: any) => {
             setLoadingServer(false)
@@ -72,11 +77,11 @@ export const EditStore = () => {
               console.log('Eliminado :D')
               navigate(-1)
             } else {
-              setloadingForm(false)
+              setLoadingServer(false)
             }
           })
           .catch((err) => {
-            setloadingForm(false)
+            setLoadingServer(false)
             console.log(err)
           })
       } else if (result.isDenied) {
@@ -91,20 +96,19 @@ export const EditStore = () => {
       ) : (
         <div className="EditStore__container">
           <div className="EditStore__appbar">
-            <H2 color="white" fontWeight="bold">
+            <H2 color="white" fontWeight="bold" fontSize="1rem">
               {response.storeName?.toLocaleUpperCase()}
             </H2>
             <div>
-              <FaEye size={30} color="white" />
               <FaTrashAlt
-                size={30}
+                size={25}
                 color="white"
                 className="pointer"
                 onClick={handleDeleteStore}
               />
             </div>
           </div>
-          {/* <div onClick={handleDeleteStore}>Eliminar pyme</div> */}
+
           <div className="EditStore__form--container">
             <GlobalForm
               data={response}

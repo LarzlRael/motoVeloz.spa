@@ -7,11 +7,13 @@ import TableMain from '../../components/table/TableMain'
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
 import './PushNotification.scss'
+import { Loading } from '../../components/loadings/Loading'
 export const PushNotifications = () => {
   const { response, loading, reload } = useAxiosAuth<any>({
     method: 'GET',
     url: '/notifications/getNotifications',
   })
+
   const [selecteNotification, setSelecteNotification] = useState({
     title: '',
     body: '',
@@ -56,13 +58,13 @@ export const PushNotifications = () => {
     <div className="PushNotificacion__container">
       <h3 className="Form__login--title">Notificaciones Push</h3>
       {loading ? (
-        <div>Loading...</div>
+        <Loading />
       ) : (
         <div className="PushNotificacion__container">
           <TableMain
             header={[
               { key: 'title', name: 'Titulo' },
-              { key: 'body', name: 'Contenido de la aplicación' },
+              { key: 'body', name: 'Contenido de la notificación' },
 
               { key: 'createdAt', name: 'Creado en ', type: 'date' },
               /* { key: 'imageUrl', name: 'Creado en ', type: 'img' }, */

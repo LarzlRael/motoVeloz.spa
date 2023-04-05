@@ -13,6 +13,7 @@ import {
   GlobalFormInterface,
   InputJsonI,
 } from '../../interfaces/Globalnterfaces'
+import DropzoneInput from '../DragNDrop/DragZone'
 /* const initialValues: { [x: string]: any } = {} */
 
 export const GlobalForm = ({
@@ -100,6 +101,15 @@ export const GlobalForm = ({
                       label={item.label!}
                       name={item.name}
                       key={item.name}
+                    />
+                  )
+                case 'file':
+                  return (
+                    <DropzoneInput
+                      label={item.label!}
+                      name={item.name}
+                      key={item.name}
+                      uploadFiles={formik.setValues}
                     />
                   )
                 /* case 'selectRRSS':

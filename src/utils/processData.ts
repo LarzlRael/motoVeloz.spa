@@ -28,3 +28,14 @@ export function processUrlImage(
     return ''
   }
 }
+
+export function processFormAppendData(values: any) {
+  let formData = new FormData()
+  for (let key in values) {
+    if (values[key]) {
+      formData.append(key, values[key])
+    }
+  }
+  /* formData.append('image', values.File) */
+  return formData
+}

@@ -6,13 +6,15 @@ import { validateStatus } from '../../utils/utils'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import './EditStore.scss'
+import { processFormAppendData } from '../../utils/processData'
 export const CreateStore = () => {
   const [loading, setloading] = useState(false)
   const navigator = useNavigate()
+
   async function onSubmit(values: any) {
     setloading(true)
 
-    postAction('/stores', values)
+    postAction('/stores', processFormAppendData(values))
       .then((res: any) => {
         setloading(false)
         if (validateStatus(res.status)) {

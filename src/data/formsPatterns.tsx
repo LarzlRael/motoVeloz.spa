@@ -40,7 +40,7 @@ export const storeAddOrEditForm: InputJsonI[] = [
     placeholder: 'Ingrese la url de la tienda',
     label: 'URL de la tienda',
     initialValue: '',
-    validate: Yup.string().required('Campo requerido')
+    validate: Yup.string().required('Campo requerido'),
   },
   {
     type: 'url',
@@ -70,6 +70,13 @@ export const storeAddOrEditForm: InputJsonI[] = [
     type: 'tel',
     placeholder: 'Ingrese el telefono',
     label: 'Telefono',
+    initialValue: '',
+  },
+  {
+    name: 'image',
+    type: 'file',
+    placeholder: 'Ingrese la imagen (opcional)',
+    label: 'Subir imagen',
     initialValue: '',
   },
 ]

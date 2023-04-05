@@ -23,7 +23,7 @@ export const StoreCard = ({
   function handleGo() {
     navigate(`/dashboard/editarTienda/${_id}`)
   }
-  console.log(storeUrl)
+
   const renderImage = imageUrl
     ? imageUrl
     : 'https://www.abc.net.au/news/image/12000000'

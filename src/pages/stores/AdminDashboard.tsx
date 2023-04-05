@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
 
@@ -26,34 +26,32 @@ import { ListStore } from './ListStore'
 import { EditStore } from './EditStore'
 import { PushNotifications } from './PushNotifications'
 import { Account } from '../auth/Account'
+import { H2 } from '../../components/text'
+import { appLogo } from '../../data/constants'
 export const AdminDashBoard = () => {
-  const { isLogged } = useSelector((state: RootState) => state.authSlice)
-  const [openMenu, setOpenMenu] = useState(false)
+  const [isOpenMenu, setOpenMenu] = useState(false)
 
   /* hooks */
-  const router = useNavigate()
+
   const dispatch = useDispatch()
   const { windowSize } = useWindowSize()
-
+  const dropdownRef = useRef<HTMLDivElement>(null)
   /* Functions */
   const handleToogleMenu = () => {
-    setOpenMenu(!openMenu)
+    if (isOpenMenu) {
+      setOpenMenu(false)
+    } else {
+      setOpenMenu(true)
+    }
   }
   useEffect(() => {
     if (windowSize.width < 768) {
-      setOpenMenu(true)
-    } else {
       setOpenMenu(false)
+    } else {
+      setOpenMenu(true)
     }
   }, [windowSize.width])
 
-  /* Logout effet */
-  /*  useEffect(() => {
-    if (!isLogged) {
-      router('/auth/login')
-    }
-  }, [isLogged])
- */
   useDocumentTitle('Adminstracion')
 
   const goToLink = () => {
@@ -61,23 +59,63 @@ export const AdminDashBoard = () => {
       handleToogleMenu()
     }
   }
+
+/*   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        console.log(isOpenMenu)
+        setOpenMenu(false)
+        console.log(isOpenMenu)
+        console.log('outside')
+      } else {
+        console.log('inside')
+      }
+    }
+
+    // Agrega el event listener cuando el componente está montado
+    window.addEventListener('click', handleClickOutside)
+
+    // Elimina el event listener cuando el componente se desmonta
+    return () => {
+      window.removeEventListener('click', handleClickOutside)
+    }
+  }, []) */
   return (
     <div>
       <div className="toolbar">
         <IconContext.Provider
-          value={{ className: 'Sidebar__icon1', size: '2.5rem' }}
+          value={{ className: 'Sidebar__icon1', size: '1rem' }}
         >
-          <div onClick={() => setOpenMenu(!openMenu)}>
-            {!openMenu ? <FaTimes /> : <FaBars />}
+          <div onClick={() => handleToogleMenu()}>
+            {isOpenMenu ? <FaTimes /> : <FaBars />}
           </div>
         </IconContext.Provider>
-
-        <h4>Panel de administracion</h4>
+        <img
+          src={appLogo}
+          style={{
+            margin: '0 0 0 0.5rem',
+            width: '2.5rem',
+            height: '2.5rem',
+            borderRadius: '5px',
+          }}
+        />
+        <H2
+          margin="0 0 0 0.5rem"
+          color="white"
+          textAlign="left"
+          className="toolbar__title"
+        >
+          Panel de administración
+        </H2>
       </div>
       <div className="AdminDashBoard">
         <div
+          ref={dropdownRef}
           className={`AdminDashBoard__dash ${
-            openMenu ? 'open-menu' : 'close-menu'
+            isOpenMenu ? 'opened-menu' : 'closed-menu'
           }`}
         >
           <div className="profile-image">
@@ -94,9 +132,8 @@ export const AdminDashBoard = () => {
                 <span className="title-dash">{title_group}</span>
 
                 {items.map(({ to, icon, title }, index) => (
-                  <div onClick={goToLink} key={index}>
+                  <div onClick={goToLink} key={uuidv4()}>
                     <Link
-                      key={uuidv4()}
                       to={to}
                       style={{
                         textDecoration: 'none',
