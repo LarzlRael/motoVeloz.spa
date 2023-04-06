@@ -33,6 +33,8 @@ export const PhoneCard = ({
 }: PhoneCardProps) => {
   const [loading, setloading] = useState(false)
   const [file, setFile] = useState<any>()
+  const [selected, setSelected] = useState(1)
+  const [isexpanded, setIsexpanded] = useState(false)
   const { response, loading: storeLoading } = useAxiosAuth<any>({
     method: 'GET',
     url: '/stores/getNamesAndUrl',
@@ -270,31 +272,72 @@ export const PhoneCard = ({
           )}
         </Form>
       </Formik>
-      <div className="notification">
-        <div className="notification__header">
-          <img className="notification__logo" src={appLogo} alt="App Logo" />
-          <span className="notification__title">{appName}</span>
-          <span className="notification__time">{timeNow()}</span>
+      <div className="">
+        <div
+          style={{
+            display: 'flex',
+            gap: '10px',
+            alignItems: 'center',
+          }}
+        >
+          <span
+            className={
+              selected === 1 ? '  Notifications__selected ' : 'selected'
+            }
+            onClick={() => {
+              setSelected(1)
+              setIsexpanded(false)
+            }}
+          >
+            Estado inicial
+          </span>
+          <span
+            className={
+              selected === 2 ? ' Notifications__selected ' : 'selected'
+            }
+            onClick={() => {
+              setSelected(2)
+              setIsexpanded(true)
+            }}
+          >
+            Vista Expandida
+          </span>
         </div>
 
-        <div className="notification__body">
-          <div className="notification__content">
-            <span className="notification__content-title">
-              {capitalizeFirstLetter(formData.title) ||
-                'Titulo de la notificación'}
-            </span>
-
-            <span className="notification__content-text">
-              {capitalizeFirstLetter(formData.body) ||
-                'Contenido de la notificación'}
-            </span>
+        <div
+          className="notification"
+          style={{
+            height: isexpanded ? '240px' : '150px',
+          }}
+        >
+          <div className="notification__header">
+            <img className="notification__logo" src={appLogo} alt="App Logo" />
+            <span className="notification__title">{appName}</span>
+            <span className="notification__time">{timeNow()}</span>
           </div>
-          <img
-            className="notification__image"
-            src={formData.imageUrl || 
-              'https://via.placeholder.com/100x100'}
-            alt="Notification Image"
-          />
+
+          <div
+            className={`notification__body ${
+              isexpanded && 'notification__body-expanded'
+            }`}
+          >
+            <div className="notification__content">
+              <span className="notification__content-title">
+                {capitalizeFirstLetter(formData.title) ||
+                  'Titulo de la notificación'}
+              </span>
+
+              <span className="notification__content-text">
+                {capitalizeFirstLetter(formData.body) ||
+                  'Contenido de la notificación'}
+              </span>
+            </div>
+            <img
+              className="notification__image"
+              src={formData.imageUrl || 'https://via.placeholder.com/100x100'}
+              alt="Notification Image"
+            />
+          </div>
         </div>
       </div>
     </div>

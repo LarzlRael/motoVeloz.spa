@@ -10,8 +10,7 @@
   border-radius: 8px;
   border: 2px solid #000;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
-  width: 80%;
-  height: 150px;
+  width: 100%;
   margin: 0 auto;
   margin-top: 32px;
   padding: 16px;
@@ -19,7 +18,6 @@
 
 .notification__header {
   display: flex;
-
   align-items: center;
   margin-bottom: 8px;
 }
@@ -46,7 +44,17 @@
   justify-content: space-between;
   align-items: center;
 }
-
+.notification__body-expanded {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.notification__body-expanded .notification__image {
+  width: 120px;
+  height: 120px;
+  margin-right: 16px;
+  margin: 0.5rem auto;
+  border-radius: 8px;
+}
 .notification__image {
   width: 80px;
   height: 80px;
@@ -70,7 +78,6 @@
   color: #666;
   line-height: 1.5;
 }
-
 
 .Form__select {
   width: 50%;
@@ -96,4 +103,16 @@
   .Form__select {
     width: 100%;
   }
+}
+
+.selected {
+  font-size: 15px;
+  color: #666;
+  cursor: pointer;
+}
+.Notifications__selected {
+  /* material blue color hex color */
+  color: #2196f3;
+  font-size: 15px;
+  /* font-weight: 400; */
 }

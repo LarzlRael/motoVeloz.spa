@@ -61,6 +61,7 @@ export const PushNotifications = () => {
         <Loading />
       ) : (
         <div className="PushNotificacion__container">
+          <PhoneCard {...selecteNotification} reload={reload} />
           <TableMain
             header={[
               { key: 'title', name: 'Titulo' },
@@ -86,7 +87,6 @@ export const PushNotifications = () => {
             main={response}
             handleInfo={selecteNotificationHandler}
           />
-          <PhoneCard {...selecteNotification} reload={reload} />
         </div>
       )}
     </div>

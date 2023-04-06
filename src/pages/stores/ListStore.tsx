@@ -16,6 +16,7 @@ export const ListStore = () => {
         <LoadingExpanded />
       ) : (
         <div className="ListStore__container">
+          
           {response?.map((res, i) => (
             <StoreCard store={res} key={i} />
           ))}
