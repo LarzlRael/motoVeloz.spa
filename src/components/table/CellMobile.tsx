@@ -1,5 +1,5 @@
-import { validateArray } from '../../utils/validation/validation'
-validateArray
+import { isValidArray } from '../../utils/validation/validation'
+isValidArray
 import DataType from './DataType'
 import { TableHeaderI } from '../../interfaces/tableInterfaces'
 interface CellMobileProps {
@@ -22,7 +22,7 @@ const CellMobile = ({
             activate === id ? 'TableDefault__cell-activate' : ''
           }`}
         >
-          {validateArray(header)
+          {isValidArray(header)
             ? header.map((a, i: number) => {
                 return (
                   <div

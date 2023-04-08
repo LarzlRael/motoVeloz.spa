@@ -4,7 +4,7 @@ import { useState } from 'react'
 import DataType from './DataType'
 import CellMobile from './CellMobile'
 import useSize from '../../hooks/useSize'
-import { validateArray } from '../../utils/validation/validation'
+import { isValidArray } from '../../utils/validation/validation'
 import { TableHeaderI } from '../../interfaces/tableInterfaces'
 
 interface TableMainProps {
@@ -39,7 +39,7 @@ const TableMain = ({
     return (
       <>
         <div className="TableDefault__header" style={gridTable}>
-          {validateArray(header)
+          {isValidArray(header)
             ? header.map((a, i: number) => (
                 <h2 key={i} className="TableDefault__head">
                   {a.name}
@@ -48,7 +48,7 @@ const TableMain = ({
             : null}
         </div>
         <div className="TableDefault__main">
-          {validateArray(main)
+          {isValidArray(main)
             ? main
                 .sort((a, b: any) => a[keyOrder] - b[keyOrder])
                 .map((head: any, i: number) => (
@@ -59,7 +59,7 @@ const TableMain = ({
                       borderBottom ? 'TableDefault__cell_borderBottom' : ''
                     }${activate === i ? 'TableDefault__cell-activate' : ''}`}
                   >
-                    {validateArray(header)
+                    {isValidArray(header)
                       ? header.map((a, j: number) => (
                           <div
                             onClick={
@@ -84,7 +84,7 @@ const TableMain = ({
   function TableForMobile() {
     return (
       <>
-        {validateArray(main)
+        {isValidArray(main)
           ? main.map((head, i: number) => {
               return (
                 <CellMobile

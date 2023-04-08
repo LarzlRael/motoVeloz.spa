@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
 import './PushNotification.scss'
 import { Loading } from '../../components/loadings/Loading'
+import LoadingWihLogo from '../../components/loadings/LoadingWithLogo'
 export const PushNotifications = () => {
   const { response, loading, reload } = useAxiosAuth<any>({
     method: 'GET',
@@ -58,7 +59,7 @@ export const PushNotifications = () => {
     <div className="PushNotificacion__container">
       <h3 className="Form__login--title">Notificaciones Push</h3>
       {loading ? (
-        <Loading />
+        <LoadingWihLogo />
       ) : (
         <div className="PushNotificacion__container">
           <PhoneCard {...selecteNotification} reload={reload} />

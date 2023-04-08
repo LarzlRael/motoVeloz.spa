@@ -4,7 +4,7 @@ import ToolTip from '../boxex/ToolTip'
 import { convertD } from '../../utils/convertDate'
 import { processUrlImage } from '../../utils/processData'
 import { DefaultBtn, RenderButton } from '../Buttons/'
-import { validateArray } from '../../utils/validation/validation'
+import { isValidArray } from '../../utils/validation/validation'
 interface DataTypeProps {
   [key: string]: any
   a: TableHeaderI
@@ -60,7 +60,7 @@ const DataType = ({ a, head, reload }: DataTypeProps) => {
     case 'actions':
       return (
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'start' }}>
-          {validateArray(a.actions!) &&
+          {isValidArray(a.actions!) &&
             a.actions!.map((item, i) => (
               <ToolTip key={i} content={item.labelTooltip}>
                 <RenderButton

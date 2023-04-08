@@ -272,7 +272,7 @@ export const PhoneCard = ({
           )}
         </Form>
       </Formik>
-      <div className="">
+      <div className="Notification__preview">
         <div
           style={{
             display: 'flex',

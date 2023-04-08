@@ -28,6 +28,7 @@ import { PushNotifications } from './PushNotifications'
 import { Account } from '../auth/Account'
 import { H2 } from '../../components/text'
 import { appLogo } from '../../data/constants'
+import Page404 from '../../components/notFound/Page404'
 export const AdminDashBoard = () => {
   const [isOpenMenu, setOpenMenu] = useState(false)
 
@@ -60,7 +61,7 @@ export const AdminDashBoard = () => {
     }
   }
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
@@ -172,6 +173,7 @@ export const AdminDashBoard = () => {
             <Route path="listar" element={<ListStore />} />
             <Route path="editarTienda/:id" element={<EditStore />} />
             <Route path="pusNotifications" element={<PushNotifications />} />
+            <Route path="*" element={<Page404 />} />
           </Routes>
         </div>
       </div>

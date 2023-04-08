@@ -17,3 +17,13 @@
   outline: none;
   cursor: pointer;
 }
+@media (max-width: 768px) {
+  .Input__check {
+    margin-top: 10px;
+  }
+  .Input__check label {
+    margin-right: 5px;
+    font-size: 14px;
+    color: var(--color-text);
+  }
+}

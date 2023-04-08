@@ -10,6 +10,7 @@ import {
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ProtectedRoutes } from './ProtectedRoutes'
+import Page404 from '../components/notFound/Page404'
 
 export default function Main() {
   return (
@@ -25,6 +26,7 @@ export default function Main() {
         />
         <Route path="/ingresar" element={<Login />} />
         <Route path="/" element={<Login />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer />
     </Router>
