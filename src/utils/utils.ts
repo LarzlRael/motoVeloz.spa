@@ -28,3 +28,13 @@ export function processDrag(list: any[]) {
   })
   
 }
+
+
+export const getTimeNow = () => {
+  let date = new Date()
+  let hours = date.getHours()
+  let minutes = date.getMinutes()
+  return `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${
+    hours > 12 ? 'PM' : 'AM'
+  }`
+}

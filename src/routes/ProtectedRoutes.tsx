@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { startSession } from '../store/slices/slices'
 import { validateStatus } from '../utils/utils'
 import { Loading } from '../components/loadings/Loading'
+import LoadingWihLogo from '../components/loadings/LoadingWithLogo'
 
 export const ProtectedRoutes = ({ children }: any) => {
   const { isLogged } = useSelector((state: RootState) => state.authSlice)
@@ -33,7 +34,7 @@ export const ProtectedRoutes = ({ children }: any) => {
     verifyTokenValidation()
   }, [isLogged])
   if (!isTokenVerified) {
-    return <Loading />
+    return <LoadingWihLogo />
   } else if (!isLogged) {
     return <Navigate to="/ingresar" />
   } else {

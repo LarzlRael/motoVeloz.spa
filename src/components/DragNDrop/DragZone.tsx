@@ -76,8 +76,8 @@ function DropzoneInput({
 
         return (
           <div key={i} className="StyledDropzone__file">
-            <div className="">{f[f.length - 1]}</div>
-            <h4>{file.path}</h4>
+            <div className="Dropzone__extension">{f[f.length - 1]}</div>
+            <h4 className="Dropzone__filename">{file.path}</h4>
             <img
               style={{
                 width: '200px',

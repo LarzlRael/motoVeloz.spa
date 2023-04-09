@@ -29,6 +29,7 @@ import { Account } from '../auth/Account'
 import { H2 } from '../../components/text'
 import { appLogo } from '../../data/constants'
 import Page404 from '../../components/notFound/Page404'
+import { NavLink } from 'react-router-dom'
 export const AdminDashBoard = () => {
   const [isOpenMenu, setOpenMenu] = useState(false)
 
@@ -134,24 +135,32 @@ export const AdminDashBoard = () => {
 
                 {items.map(({ to, icon, title }, index) => (
                   <div onClick={goToLink} key={uuidv4()}>
-                    <Link
+                    <NavLink
                       to={to}
                       style={{
                         textDecoration: 'none',
                         color: 'inherit',
                       }}
                     >
-                      <div className="AdminDashBoard__dash--item">
-                        {icon}
-                        <span
-                          style={{
-                            marginLeft: '10px',
-                          }}
+                      {({ isActive, isPending }) => (
+                        <div
+                          className={
+                            isActive
+                              ? 'AdminDashBoard__dash--item active '
+                              : 'AdminDashBoard__dash--item'
+                          }
                         >
-                          {title}
-                        </span>
-                      </div>
-                    </Link>
+                          {icon}
+                          <span
+                            style={{
+                              marginLeft: '10px',
+                            }}
+                          >
+                            {title}
+                          </span>
+                        </div>
+                      )}
+                    </NavLink>
                   </div>
                 ))}
               </div>

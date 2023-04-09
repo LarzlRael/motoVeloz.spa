@@ -8,13 +8,15 @@ export const ButtonStyle = styled.button<{
   backGroundColor?: string
   margin?: string
   borderRadius?: string
+  padding?: string
 }>`
   background: ${({ backGroundColor }) =>
     backGroundColor ? backGroundColor : '#444752'};
   color: ${({ textColor }) => (textColor ? textColor : 'white')};
-  padding: 0.7rem;
+
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : '5px')};
   border: none;
+  padding: ${({ padding }) => padding ?? '0.7rem'};
   display: flex;
   align-content: center;
   justify-content: center;
@@ -22,9 +24,9 @@ export const ButtonStyle = styled.button<{
   margin: ${({ margin }) => margin};
 
   cursor: pointer;
-  /* &:hover {
-    background: darken(0.9, '#F5F5F5');
-  } */
+  &:hover {
+    background: darken(0.9, ${({ backGroundColor }) => backGroundColor});
+  }
   @media ${sizeMedia('xs_sm')} {
     padding: 0.7rem;
     width: 100%;
@@ -43,6 +45,7 @@ interface ButtonProps {
   margin?: string
   className?: string
   borderRadius?: string
+  padding?: string
 }
 export const Button = ({
   children,
@@ -54,6 +57,7 @@ export const Button = ({
   margin = '0',
   className,
   borderRadius,
+  padding,
 }: ButtonProps) => {
   return (
     <ButtonStyle
@@ -64,6 +68,7 @@ export const Button = ({
       margin={margin}
       borderRadius={borderRadius}
       className={className}
+      padding={padding}
     >
       {children}
 

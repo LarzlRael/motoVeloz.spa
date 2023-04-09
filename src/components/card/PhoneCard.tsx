@@ -3,7 +3,7 @@ import './PhoneCard.scss'
 import { Input } from '../forms/Input'
 import { useEffect, useRef, useState } from 'react'
 import { Loading } from '../loadings/Loading'
-import { capitalizeFirstLetter, validateStatus } from '../../utils/utils'
+import { capitalizeFirstLetter, getTimeNow, validateStatus } from '../../utils/utils'
 import {
   postAction,
   putAction,
@@ -39,7 +39,7 @@ export const PhoneCard = ({
     method: 'GET',
     url: '/stores/getNamesAndUrl',
   })
-
+  
   const [formData, setFormData] = useState({
     _id: _id,
     title: title,
@@ -56,16 +56,8 @@ export const PhoneCard = ({
       setFormData({ ...formData, title, body, imageUrl })
     }
   }, [title, body, imageUrl, loading])
-  const timeNow = () => {
-    let date = new Date()
-    let hours = date.getHours()
-    let minutes = date.getMinutes()
-    return `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${
-      hours > 12 ? 'PM' : 'AM'
-    }`
-  }
+
   function onSubmit() {
-    console.log(file.image)
     setloading(true)
     if (formData.title === '' || formData.body === '') {
       setloading(false)
@@ -313,7 +305,7 @@ export const PhoneCard = ({
           <div className="notification__header">
             <img className="notification__logo" src={appLogo} alt="App Logo" />
             <span className="notification__title">{appName}</span>
-            <span className="notification__time">{timeNow()}</span>
+            <span className="notification__time">{getTimeNow()}</span>
           </div>
 
           <div

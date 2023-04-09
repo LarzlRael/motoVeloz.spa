@@ -1,4 +1,7 @@
+import { FaChevronLeft } from 'react-icons/fa'
 import './NotFound.scss'
+import { Button } from '../Buttons'
+import { useNavigate } from 'react-router-dom'
 
 interface NotFoundProps {
   searchTerm: string
@@ -20,8 +23,32 @@ const NotFound = ({
         />
         <h1 className="not-found__title">{title}</h1>
         <p className="not-found__subtitle">{subtitle}</p>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <ButtonBack />
+        </div>
       </div>
     </div>
+  )
+}
+
+export const ButtonBack = () => {
+  const navigate = useNavigate()
+  return (
+    <Button
+      onClick={() => navigate(-1)}
+      padding="1rem 4rem"
+      margin="2rem 0"
+      background="var(--secondary-color)"
+      borderRadius="15px"
+    >
+      <FaChevronLeft />
+      Regresar
+    </Button>
   )
 }
 

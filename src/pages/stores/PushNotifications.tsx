@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { PhoneCard } from '../../components/card/PhoneCard'
 import useAxiosAuth from '../../hooks/useAxiosAuth'
 import { FaTrash } from 'react-icons/fa'
