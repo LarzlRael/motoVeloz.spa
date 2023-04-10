@@ -134,7 +134,7 @@ export const PhoneCard = ({
           })
           reload()
         } else {
-          toast.error('Notificación editada correctamente', {
+          toast.error('Hubo un error', {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,

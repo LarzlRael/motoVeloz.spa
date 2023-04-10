@@ -68,7 +68,6 @@ export const EditStore = () => {
       confirmButtonText: 'Eliminar',
       denyButtonText: `Cancelar`,
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         setLoadingServer(true)
         deleteAction(`/stores/${id}`)

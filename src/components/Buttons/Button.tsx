@@ -24,9 +24,9 @@ export const ButtonStyle = styled.button<{
   margin: ${({ margin }) => margin};
 
   cursor: pointer;
-  &:hover {
+  /* &:hover {
     background: darken(0.9, ${({ backGroundColor }) => backGroundColor});
-  }
+  } */
   @media ${sizeMedia('xs_sm')} {
     padding: 0.7rem;
     width: 100%;
