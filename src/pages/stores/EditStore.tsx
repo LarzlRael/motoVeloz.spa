@@ -20,6 +20,7 @@ import { processFormAppendData } from '../../utils/processData'
 import LoadingWihLogo from '../../components/loadings/LoadingWithLogo'
 import Swal from 'sweetalert2'
 import NotFound from '../../components/notFound/NotFound'
+import BackIcon from '../../components/boxex/BackIcon'
 
 export const EditStore = () => {
   const { id } = useParams()
@@ -108,17 +109,27 @@ export const EditStore = () => {
               />
             </div>
           </div>
-
-          <div className="EditStore__form--container">
-            <GlobalForm
-              data={response}
-              inputJson={storeAddOrEditForm}
-              onSubmit={onSubmit}
-              loading={loadingServer}
-              formTitle="Editar negocio"
-              titleButton="Editar"
+          <div
+            style={{
+              padding: '1rem',
+            }}
+          >
+            <BackIcon
+              onClick={() => {
+                navigate(-1)
+              }}
             />
-            <StoreCard store={response} />
+            <div className="EditStore__form--container">
+              <GlobalForm
+                data={response}
+                inputJson={storeAddOrEditForm}
+                onSubmit={onSubmit}
+                loading={loadingServer}
+                formTitle="Editar negocio"
+                titleButton="Editar"
+              />
+              <StoreCard store={response} />
+            </div>
           </div>
         </div>
       ) : (

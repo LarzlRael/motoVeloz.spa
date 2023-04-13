@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import  { useState, useEffect, useRef } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
 
@@ -174,7 +174,7 @@ export const AdminDashBoard = () => {
             <ul className="AdminDashBoard__dash--item">Salir</ul>
           </div>
         </div>
-        <div className="dash-content">
+        <div className="AdminDashBoard__dash--maincontent">
           <Routes>
             <Route path="/" element={<ListStore />} />
             <Route path="crear" element={<CreateStore />} />

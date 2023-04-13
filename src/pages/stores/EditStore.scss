@@ -9,7 +9,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  padding: 1.5rem;
+  /* padding: 1rem 20px; */
+}
+.AdminDashBoard__dash--maincontent {
+  padding: 0;
 }
 .CreateStore__form--container {
   width: 500px;

@@ -292,7 +292,7 @@ export const PhoneCard = ({
               setIsexpanded(true)
             }}
           >
-            Vista Expandida
+            Vista expandida
           </span>
         </div>
 
@@ -300,6 +300,7 @@ export const PhoneCard = ({
           className="notification"
           style={{
             height: isexpanded ? '240px' : '150px',
+            transition: 'all 0.1s ease',
           }}
         >
           <div className="notification__header">
