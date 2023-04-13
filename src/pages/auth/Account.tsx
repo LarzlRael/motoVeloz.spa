@@ -1,7 +1,4 @@
-import React from 'react'
-
+import './Account.scss'
 export const Account = () => {
-  return (
-    <div>Account</div>
-  )
+  return <div className="Account">Perfil de usuario</div>
 }

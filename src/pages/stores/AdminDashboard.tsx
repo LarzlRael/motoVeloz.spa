@@ -123,10 +123,10 @@ export const AdminDashBoard = () => {
           <div className="profile-image">
             <img
               className="profile-image-img"
-              src="https://t4.ftcdn.net/jpg/03/40/12/49/360_F_340124934_bz3pQTLrdFpH92ekknuaTHy8JuXgG7fi.jpg"
+              src={appLogo}
               alt=""
             />
-            <span className="profile-image-name">Nombre de Usuario</span>
+            <span className="profile-image-name">RockerOscar</span>
           </div>
           <div className="AdminDashBoard__dash--group">
             {accountsLink.map(({ title_group, items }) => (
