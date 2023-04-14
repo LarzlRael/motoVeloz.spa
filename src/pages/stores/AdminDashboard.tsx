@@ -1,4 +1,4 @@
-import  { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
 
@@ -33,8 +33,9 @@ import { NavLink } from 'react-router-dom'
 export const AdminDashBoard = () => {
   const [isOpenMenu, setOpenMenu] = useState(false)
 
+  const { isLogged } = useSelector((state: RootState) => state.authSlice)
+  console.log('Dashboard: ' + isLogged)
   /* hooks */
-
   const dispatch = useDispatch()
   const { windowSize } = useWindowSize()
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -121,11 +122,7 @@ export const AdminDashBoard = () => {
           }`}
         >
           <div className="profile-image">
-            <img
-              className="profile-image-img"
-              src={appLogo}
-              alt=""
-            />
+            <img className="profile-image-img" src={appLogo} alt="" />
             <span className="profile-image-name">RockerOscar</span>
           </div>
           <div className="AdminDashBoard__dash--group">

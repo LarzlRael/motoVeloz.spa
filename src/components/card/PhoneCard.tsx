@@ -3,7 +3,11 @@ import './PhoneCard.scss'
 import { Input } from '../forms/Input'
 import { useEffect, useRef, useState } from 'react'
 import { Loading } from '../loadings/Loading'
-import { capitalizeFirstLetter, getTimeNow, validateStatus } from '../../utils/utils'
+import {
+  capitalizeFirstLetter,
+  getTimeNow,
+  validateStatus,
+} from '../../utils/utils'
 import {
   postAction,
   putAction,
@@ -39,7 +43,7 @@ export const PhoneCard = ({
     method: 'GET',
     url: '/stores/getNamesAndUrl',
   })
-  
+
   const [formData, setFormData] = useState({
     _id: _id,
     title: title,
@@ -57,7 +61,8 @@ export const PhoneCard = ({
     }
   }, [title, body, imageUrl, loading])
 
-  function onSubmit() {
+  function handleOnSubmit() {
+    console.log('enviando')
     setloading(true)
     if (formData.title === '' || formData.body === '') {
       setloading(false)
@@ -67,13 +72,17 @@ export const PhoneCard = ({
         text: 'Titulo y cuerpo de la notificacion son requeridos',
       })
     }
-
+    console.log(file)
     postAction(
       '/notifications/createNotification',
-      processFormAppendData({
-        ...formData,
-        image: file.image,
-      }),
+      file?.image !== undefined && file?.image !== null
+        ? processFormAppendData({
+            ...formData,
+            image: file.image,
+          })
+        : processFormAppendData({
+            ...formData,
+          }),
     )
       .then((res: any) => {
         setloading(false)
@@ -103,7 +112,9 @@ export const PhoneCard = ({
         }
       })
       .catch((err) => {
+        console.log(err)
         setloading(false)
+
         toast.error('Hubo un error al enviar la notificacion', {
           position: 'top-right',
           autoClose: 5000,
@@ -165,14 +176,14 @@ export const PhoneCard = ({
   }
   return (
     <div className="PhoneCard">
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik initialValues={initialValues} onSubmit={handleOnSubmit}>
         <Form className="Form__login">
           <h3 className="Form__login--title">Crear nueva notificacion push</h3>
           <br />
-          <label className="Form__label--pyme">Titulo de la notificación</label>
+          <label className="Form__label--pyme">Título de la notificación</label>
           <Input
             label=""
-            placeholder="Título de la notificación"
+            placeholder="Ingrese título de la notificación"
             name="title"
             type="text"
             onChange={onChange}
@@ -182,7 +193,7 @@ export const PhoneCard = ({
           <label className="Form__label--pyme">Texto de la notificación</label>
           <Input
             label=""
-            placeholder="Contenido de la notificación"
+            placeholder="Ingresar texto de la notificación"
             name="body"
             type="text"
             disabled={loading}

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Formik, Form, Field } from 'formik'
+import { useEffect, useState } from 'react'
+import { Formik, Form } from 'formik'
+import Swal from 'sweetalert2'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../store/store'
@@ -8,18 +9,21 @@ import { startSession } from '../../store/slices/slices'
 import { useNavigate } from 'react-router-dom'
 import { Input } from '../../components/forms/Input'
 import { Loading } from '../../components/loadings/Loading'
-import { H2 } from '../../components/text/H2'
 import { validateStatus } from '../../utils/utils'
 import { postAction } from '../../provider/action/ActionAuthorization'
-import Swal from 'sweetalert2'
 import { appLogo, appName } from '../../data/constants'
 import './../../styles/_media.scss'
 import { Button } from '../../components/Buttons/Button'
 export const Login = () => {
-  const { isLogged } = useSelector((state: RootState) => state.authSlice)
+  const status = useSelector((state: RootState) => state.authSlice)
   const dispatch = useDispatch()
   const [loading, setloading] = useState(false)
   const push = useNavigate()
+  useEffect(() => {
+    if (status.isLogged) {
+      push('/dashboard/listar')
+    }
+  }, [])
 
   async function onSubmit({ password, userName }: initialValuesI) {
     if (password === '' || userName === '') {
