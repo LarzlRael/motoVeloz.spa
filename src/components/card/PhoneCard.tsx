@@ -21,6 +21,7 @@ import Swal from 'sweetalert2'
 import useAxiosAuth from '../../hooks/useAxiosAuth'
 import DropzoneInput from '../DragNDrop/DragZone'
 import { processFormAppendData } from '../../utils/processData'
+import { H2 } from '../text'
 interface PhoneCardProps {
   title?: string
   body?: string
@@ -178,7 +179,14 @@ export const PhoneCard = ({
     <div className="PhoneCard">
       <Formik initialValues={initialValues} onSubmit={handleOnSubmit}>
         <Form className="Form__login">
-          <h3 className="Form__login--title">Crear nueva notificacion push</h3>
+          <H2
+            color="var(--color-text)"
+            textAlign="start"
+            fontSize="1.3rem"
+            fontWeight="600"
+          >
+            Crear nueva notificacion push
+          </H2>
           <br />
           <label className="Form__label--pyme">Título de la notificación</label>
           <Input

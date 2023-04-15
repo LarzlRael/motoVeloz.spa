@@ -33,8 +33,6 @@ import { NavLink } from 'react-router-dom'
 export const AdminDashBoard = () => {
   const [isOpenMenu, setOpenMenu] = useState(false)
 
-  const { isLogged } = useSelector((state: RootState) => state.authSlice)
-  console.log('Dashboard: ' + isLogged)
   /* hooks */
   const dispatch = useDispatch()
   const { windowSize } = useWindowSize()

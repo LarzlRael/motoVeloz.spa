@@ -47,7 +47,12 @@ export const ListStore = () => {
   }
   return (
     <div className="ListStore__container">
-      <H2 textAlign="start" fontSize="1.3rem" fontWeight="bold">
+      <H2
+        textAlign="start"
+        fontSize="1.3rem"
+        fontWeight="bold"
+        color="var(--color-text)"
+      >
         Listado de tiendas
       </H2>
       <form className="search-form" onSubmit={handleSubmit}>

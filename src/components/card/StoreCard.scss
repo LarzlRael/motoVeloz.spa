@@ -13,6 +13,17 @@
     border: 1px solid var(--primary-color);
   }
 }
+.StoreCard__detail {
+  border: 1px solid var(--color-border);
+  background: #eeeeee;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  /* padding: 0 0.5rem 0.5rem 0.5rem; */
+  /* max-height: 700px; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: auto;
+}
+
 .StoreCard__img {
   border-radius: 10px 10px 0 0;
   width: 100%;
@@ -24,6 +35,26 @@
   font-weight: 500;
   color: var(--color-text);
 }
-.StoreCard__info-container{
+.StoreCard__info-container {
   padding: 0.5rem;
+}
+.StoreCard__link {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: block;
+  word-wrap: break-word;
+}
+.StoreCard__link--details {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: block;
+  word-wrap: break-word;
+}
+
+@media (max-width: 420px) {
+  .StoreCard__link {
+    display: none;
+  }
 }

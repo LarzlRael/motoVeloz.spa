@@ -21,6 +21,7 @@ import LoadingWihLogo from '../../components/loadings/LoadingWithLogo'
 import Swal from 'sweetalert2'
 import NotFound from '../../components/notFound/NotFound'
 import BackIcon from '../../components/boxex/BackIcon'
+import { StoreCardDetail } from '../../components/card/StoreCardDetail'
 
 export const EditStore = () => {
   const { id } = useParams()
@@ -128,7 +129,7 @@ export const EditStore = () => {
                 formTitle="Editar negocio"
                 titleButton="Editar"
               />
-              <StoreCard store={response} />
+              <StoreCardDetail store={response} />
             </div>
           </div>
         </div>

@@ -7,8 +7,8 @@ import TableMain from '../../components/table/TableMain'
 import Swal from 'sweetalert2'
 import { toast } from 'react-toastify'
 import './PushNotification.scss'
-import { Loading } from '../../components/loadings/Loading'
 import LoadingWihLogo from '../../components/loadings/LoadingWithLogo'
+import { H2 } from '../../components/text'
 export const PushNotifications = () => {
   const { response, loading, reload } = useAxiosAuth<any>({
     method: 'GET',
@@ -56,38 +56,59 @@ export const PushNotifications = () => {
   }
 
   return (
-    <div className="PushNotificacion__container">
-      <h3 className="Form__login--title">Notificaciones Push</h3>
+    <div className="PushNotificacion">
+      <H2
+        color="var(--color-text)"
+        textAlign="start"
+        fontSize="1.3rem"
+        fontWeight="600"
+      >
+        Notificaciones Push
+      </H2>
       {loading ? (
         <LoadingWihLogo />
       ) : (
         <div className="PushNotificacion__container">
           <PhoneCard {...selecteNotification} reload={reload} />
-          <TableMain
-            header={[
-              { key: 'title', name: 'Titulo' },
-              { key: 'body', name: 'Contenido de la notificación' },
+          {response.length > 0 ? (
+            <>
+              <H2
+                color="var(--color-text)"
+                textAlign="start"
+                fontSize="1.3rem"
+                fontWeight="600"
+              >
+                Notificaciones enviadas: <span>{response.length}</span>
+              </H2>
+              <TableMain
+                header={[
+                  { key: 'title', name: 'Titulo' },
+                  { key: 'body', name: 'Contenido de la notificación' },
 
-              { key: 'createdAt', name: 'Creado en ', type: 'date' },
-              /* { key: 'imageUrl', name: 'Creado en ', type: 'img' }, */
-              {
-                key: 'action',
-                name: 'Acciones',
-                type: 'actions',
-                actions: [
+                  { key: 'createdAt', name: 'Creado en ', type: 'date' },
+                  /* { key: 'imageUrl', name: 'Creado en ', type: 'img' }, */
                   {
-                    labelTooltip: 'Eliminar notificación',
-                    action: (e) => {
-                      handleDleteNotification(e._id)
-                    },
-                    icon: <FaTrash color="#f44336" size={20} />,
+                    key: 'action',
+                    name: 'Acciones',
+                    type: 'actions',
+                    actions: [
+                      {
+                        labelTooltip: 'Eliminar notificación',
+                        action: (e) => {
+                          handleDleteNotification(e._id)
+                        },
+                        icon: <FaTrash color="#f44336" size={20} />,
+                      },
+                    ],
                   },
-                ],
-              },
-            ]}
-            main={response}
-            handleInfo={selecteNotificationHandler}
-          />
+                ]}
+                main={response}
+                handleInfo={selecteNotificationHandler}
+              />
+            </>
+          ) : (
+            <H2 margin="1rem 0">No hay notificaciones enviadas</H2>
+          )}
         </div>
       )}
     </div>

@@ -1,27 +1,17 @@
 import './StoreCard.scss'
-import React from 'react'
 import { StoreResponseInterface } from '../../interfaces/ResponseInterfaces'
 import { P } from '../text/P'
-import { useNavigate } from 'react-router-dom'
+
 import { capitalizeFirstLetter } from '../../utils/utils'
 
 interface StoreCardProps {
   store: StoreResponseInterface
 }
-export const StoreCard = ({
-  store: {
-    _id,
-    imageUrl,
-    storeName,
-    storeDescription,
-    storeAddress,
-    storePhone,
-    storeUrl,
-  },
+export const StoreCardDetail = ({
+  store: { imageUrl, storeName, storeDescription, storeAddress, storeUrl },
 }: StoreCardProps) => {
-  const navigate = useNavigate()
   function handleGo() {
-    navigate(`/dashboard/editarTienda/${_id}`)
+    window.open(storeUrl, '_blank')
   }
 
   const renderImage = imageUrl
@@ -29,7 +19,7 @@ export const StoreCard = ({
     : 'https://www.abc.net.au/news/image/12000000'
 
   return (
-    <div onClick={handleGo} className="StoreCard pointer">
+    <div onClick={handleGo} className="StoreCard__detail pointer">
       <img
         className="StoreCard__img"
         src={renderImage}
@@ -39,7 +29,7 @@ export const StoreCard = ({
         <h1 className="StoreCard__title">{capitalizeFirstLetter(storeName)}</h1>
         {<P>{capitalizeFirstLetter(storeDescription)}</P>}
         <a
-          className="StoreCard__link"
+          className="StoreCard__link--details"
           href={storeUrl}
           target="_blank"
           rel="noreferrer"
