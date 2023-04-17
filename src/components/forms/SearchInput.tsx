@@ -4,9 +4,11 @@ import { FaSearch } from 'react-icons/fa'
 
 interface Props {
   onDebounce: (value: string) => void
+  placeholder?: string
+  callback?: () => void
 }
 
-export const SearchInput = ({ onDebounce }: Props) => {
+export const SearchInput = ({ onDebounce, placeholder, callback }: Props) => {
   const [textValue, setTextValue] = useState('')
 
   const { debouncedValue } = useDebounceValue(textValue, 750)
@@ -16,17 +18,25 @@ export const SearchInput = ({ onDebounce }: Props) => {
   }, [debouncedValue, onDebounce])
 
   return (
-    <div>
-      <div>
+    <div className="search-form">
+      <div className="search-form__wrapper">
         <input
-          placeholder="Buscar pokémon"
+          placeholder={placeholder}
           autoCapitalize="none"
           value={textValue}
+          className="search-form__input"
           onChange={(e) => {
             setTextValue(e.target.value)
           }}
         />
-        <FaSearch name="search-outline" color="grey" size={30} />
+        <div className="search-form__button">
+          <FaSearch
+            name="search-outline"
+            color="white"
+            size={15}
+            onClick={callback}
+          />
+        </div>
       </div>
     </div>
   )

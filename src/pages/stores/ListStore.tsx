@@ -11,40 +11,24 @@ import NotFound from '../../components/notFound/NotFound'
 import { FaSearch } from 'react-icons/fa'
 import { H2 } from '../../components/text'
 export const ListStore = () => {
-  const [search, setSearch] = useState({
-    url: '/stores',
-    query: '',
-  })
-  const [termSearch, setTermSearch] = useState('')
+  const [querySearch, setQuerySearch] = useState('')
   const { response, loading, reload } = useAxios<StoreResponseInterface[]>({
     url:
-      search.query.length > 0
-        ? `${search.url}/findStoreByName/${search.query}`
-        : search.url,
+      querySearch.length > 0
+        ? `/stores/findStoreByName/${querySearch}`
+        : '/stores',
     method: 'GET',
   })
-  let timeout: any = null
 
-  const handleChange = (event: any) => {
-    const { value } = event.target
-    setSearch({
-      ...search,
-      query: value,
-    })
-    /* clearTimeout(timeout)
-    timeout = setTimeout(() => {
-      reload()
-    }, 1000) */
-  }
-
-  /*   useEffect(() => {
+  useEffect(() => {
     reload()
-  }, [termSearch])
- */
-  function handleSubmit(event: any) {
+  }, [querySearch])
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     reload()
   }
+
   return (
     <div className="ListStore__container">
       <H2
@@ -55,7 +39,7 @@ export const ListStore = () => {
       >
         Listado de tiendas
       </H2>
-      <form className="search-form" onSubmit={handleSubmit}>
+      {/* <form className="search-form" onSubmit={(e) => onSubmitFormDebounced(e)}>
         <div className="search-form__wrapper">
           <input
             type="text"
@@ -69,11 +53,16 @@ export const ListStore = () => {
             <FaSearch size={15} />
           </button>
         </div>
-      </form>
+      </form> */}
+      <SearchInput
+        onDebounce={(value) => setQuerySearch(value)}
+        placeholder="Buscar tienda por nombre"
+        callback={reload}
+      />
       <ArrayDataComponent
         data={response}
         loading={loading}
-        noResultsComponent={<NotFound searchTerm={search.query} />}
+        noResultsComponent={<NotFound searchTerm={querySearch} />}
         renderComponent={(data) => (
           <div className="ListStore__container--stores">
             {data?.map((res, i) => (

@@ -77,6 +77,8 @@ export const PushNotifications = () => {
                 textAlign="start"
                 fontSize="1.3rem"
                 fontWeight="600"
+                margin="1rem 0"
+                marginResponsive='0.5rem 0'
               >
                 Notificaciones enviadas: <span>{response.length}</span>
               </H2>
