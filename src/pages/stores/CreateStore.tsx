@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import './EditStore.scss'
 import { processFormAppendData } from '../../utils/processData'
+import BackIcon from '../../components/boxex/BackIcon'
 export const CreateStore = () => {
   const [loading, setloading] = useState(false)
   const navigator = useNavigate()
@@ -40,16 +41,15 @@ export const CreateStore = () => {
   }
 
   return (
-    <div>
-      <div>
-        <div className="CreateStore__form--container">
-          <GlobalForm
-            inputJson={storeAddOrEditForm}
-            onSubmit={onSubmit}
-            formTitle="Registrar Negocio"
-            loading={loading}
-          />
-        </div>
+    <div className="CreateStore">
+      <BackIcon />
+      <div className="CreateStore__form--container">
+        <GlobalForm
+          inputJson={storeAddOrEditForm}
+          onSubmit={onSubmit}
+          formTitle="Registrar Negocio"
+          loading={loading}
+        />
       </div>
     </div>
   )

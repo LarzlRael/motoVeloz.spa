@@ -10,7 +10,10 @@ import ArrayDataComponent from '../../components/card/ArrayDataComponent'
 import NotFound from '../../components/notFound/NotFound'
 import { FaSearch } from 'react-icons/fa'
 import { H2 } from '../../components/text'
+import { FloatingActionButton } from '../../components/Buttons/FloatingActionButton'
+import { useNavigate, useNavigation } from 'react-router-dom'
 export const ListStore = () => {
+  const navigator = useNavigate()
   const [querySearch, setQuerySearch] = useState('')
   const { response, loading, reload } = useAxios<StoreResponseInterface[]>({
     url:
@@ -54,6 +57,9 @@ export const ListStore = () => {
           </button>
         </div>
       </form> */}
+      <FloatingActionButton 
+      onClick={() => navigator('/dashboard/crear')}
+      />
       <SearchInput
         onDebounce={(value) => setQuerySearch(value)}
         placeholder="Buscar tienda por nombre"
