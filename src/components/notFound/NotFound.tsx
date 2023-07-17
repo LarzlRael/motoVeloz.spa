@@ -5,14 +5,11 @@ import { useNavigate } from 'react-router-dom'
 
 interface NotFoundProps {
   searchTerm: string
-  title?: string
-  subtitle?: string
+  title: string
+  subtitle: string
+  showButtonBack: boolean
 }
-const NotFound = ({
-  searchTerm,
-  title = `No se encontró ningún resultado para "${searchTerm}"`,
-  subtitle = 'Lo siento, no se encontraron resultados para su búsqueda.',
-}: NotFoundProps) => {
+const NotFound = ({ title, subtitle, showButtonBack }: NotFoundProps) => {
   return (
     <div className="not-found">
       <div className="not-found__content">
@@ -29,7 +26,7 @@ const NotFound = ({
             justifyContent: 'center',
           }}
         >
-          <ButtonBack />
+          {showButtonBack && <ButtonBack />}
         </div>
       </div>
     </div>

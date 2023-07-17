@@ -57,9 +57,7 @@ export const ListStore = () => {
           </button>
         </div>
       </form> */}
-      <FloatingActionButton 
-      onClick={() => navigator('/dashboard/crear')}
-      />
+      <FloatingActionButton onClick={() => navigator('/dashboard/crear')} />
       <SearchInput
         onDebounce={(value) => setQuerySearch(value)}
         placeholder="Buscar tienda por nombre"
@@ -68,7 +66,14 @@ export const ListStore = () => {
       <ArrayDataComponent
         data={response}
         loading={loading}
-        noResultsComponent={<NotFound searchTerm={querySearch} />}
+        noResultsComponent={
+          <NotFound
+            searchTerm={querySearch}
+            title={`No se encontró ningún resultado para "${querySearch}"`}
+            subtitle="Lo siento, no se encontraron resultados para su búsqueda."
+            showButtonBack={false}
+          />
+        }
         renderComponent={(data) => (
           <div className="ListStore__container--stores">
             {data?.map((res, i) => (

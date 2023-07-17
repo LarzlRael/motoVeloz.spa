@@ -97,7 +97,7 @@ export const accountsLink: AccountsLinkInterface[] = [
         icon: <BsHouseAddFill size={25} />,
       },
       {
-        title: 'Listar tiendas',
+        title: 'Todas las tiendas',
         to: '/dashboard/listar',
         icon: <BiStoreAlt size={25} />,
       },

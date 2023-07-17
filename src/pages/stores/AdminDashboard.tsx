@@ -85,7 +85,9 @@ export const AdminDashBoard = () => {
     }
   }, []) */
   return (
-    <div>
+    <div style={{
+      height: '100%',
+    }}>
       <div className="toolbar">
         <IconContext.Provider
           value={{ className: 'Sidebar__icon1', size: '1rem' }}
