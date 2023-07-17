@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { IconContext } from 'react-icons'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { FaBars, FaPowerOff, FaTimes } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {
@@ -85,9 +85,11 @@ export const AdminDashBoard = () => {
     }
   }, []) */
   return (
-    <div style={{
-      height: '100%',
-    }}>
+    <div
+      style={{
+        height: '100%',
+      }}
+    >
       <div className="toolbar">
         <IconContext.Provider
           value={{ className: 'Sidebar__icon1', size: '1rem' }}
@@ -139,7 +141,7 @@ export const AdminDashBoard = () => {
                         color: 'inherit',
                       }}
                     >
-                      {({ isActive, isPending }) => (
+                      {({ isActive }) => (
                         <div
                           className={
                             isActive
@@ -163,12 +165,30 @@ export const AdminDashBoard = () => {
               </div>
             ))}
           </div>
-          <span className="title-dash"></span>
+          <div
+            style={{
+              display: 'flex',
+              flexGrow: 1,
+            }}
+          ></div>
+
           <div
             className="AdminDashBoard__dash--group"
             onClick={() => dispatch(logOutSession())}
           >
-            <ul className="AdminDashBoard__dash--item">Salir</ul>
+            <div className="AdminDashBoard__dash--item">
+              <FaPowerOff color="#f44336" size="30" />
+              <span
+                style={{
+                  marginLeft: '10px',
+                  fontWeight: 'bold',
+                  fontSize: '1rem',
+                  textTransform: 'none',
+                }}
+              >
+                Cerrar sesión
+              </span>
+            </div>
           </div>
         </div>
         <div className="AdminDashBoard__dash--maincontent">

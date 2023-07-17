@@ -120,7 +120,7 @@ export const EditStore = () => {
                 navigate(-1)
               }}
             />
-            <div className="EditStore__form--container">
+            <div className="EditStore__form--container animate__animated animate__fadeIn">
               <GlobalForm
                 data={response}
                 inputJson={storeAddOrEditForm}
@@ -134,7 +134,11 @@ export const EditStore = () => {
           </div>
         </div>
       ) : (
-        <NotFound searchTerm="Esta busqueda" />
+        <NotFound searchTerm="Esta busqueda"
+        showButtonBack={false}
+        subtitle=''
+        title=''
+         />
       )}
     </div>
   )

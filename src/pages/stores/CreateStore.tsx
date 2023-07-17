@@ -41,7 +41,7 @@ export const CreateStore = () => {
   }
 
   return (
-    <div className="CreateStore">
+    <div className="CreateStore animate__animated animate__fadeIn">
       <BackIcon />
       <div className="CreateStore__form--container">
         <GlobalForm

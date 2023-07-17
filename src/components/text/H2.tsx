@@ -35,5 +35,7 @@ interface PropsH2 {
   [x: string]: any
 }
 export const H2 = (props: PropsH2) => (
-  <H2Styled {...props}>{props.children}</H2Styled>
+  <H2Styled className={props.className} {...props}>
+    {props.children}
+  </H2Styled>
 )

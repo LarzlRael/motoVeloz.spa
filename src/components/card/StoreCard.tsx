@@ -29,7 +29,7 @@ export const StoreCard = ({
     : 'https://www.abc.net.au/news/image/12000000'
 
   return (
-    <div onClick={handleGo} className="StoreCard pointer">
+    <div onClick={handleGo} className="StoreCard pointer animate__animated animate__fadeIn">
       <img
         className="StoreCard__img"
         src={renderImage}

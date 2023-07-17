@@ -139,6 +139,8 @@
   }
 }
 .AdminDashBoard__dash {
+  display: flex;
+  flex-direction: column;
   background: var(--dash-background);
   color: white;
   transition: 0.4s ease all;
@@ -159,8 +161,10 @@
   } */
 }
 
-.AdminDashBoard__dash--group {
+.AdminDashBoard__dash--logout {
   padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
 }
 .AdminDashBoard__dash--item {
   display: block;

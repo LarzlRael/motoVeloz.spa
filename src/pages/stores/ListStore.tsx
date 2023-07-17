@@ -35,6 +35,7 @@ export const ListStore = () => {
   return (
     <div className="ListStore__container">
       <H2
+        className="animate__animated animate__fadeIn"
         textAlign="start"
         fontSize="1.3rem"
         fontWeight="bold"
