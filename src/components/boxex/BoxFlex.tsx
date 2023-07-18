@@ -1,13 +1,5 @@
 import styled from 'styled-components'
-const BoxFlexStyle = styled.div<{
-  justify: string
-  gap: string
-  direction: string
-  wrap: string
-  margin: string
-  alignItems: string
-  width: string
-}>`
+const BoxFlexStyle = styled.div<BoxFlexI>`
   display: flex;
   align-items: ${(props) => (props.alignItems ? props.alignItems : 'center')};
   gap: ${(props) => props.gap};
@@ -41,8 +33,8 @@ interface BoxFlexI {
   width?: string
   style?: React.CSSProperties
 }
-const BoxFlex = (props: BoxFlexI) => {
-  const {
+const BoxFlex = ({ children, ...props }: BoxFlexI) => {
+  /* const {
     children,
     className,
     justify = 'center',
@@ -53,22 +45,8 @@ const BoxFlex = (props: BoxFlexI) => {
     margin = '',
     width,
     style,
-  } = props
-  return (
-    <BoxFlexStyle
-      style={style}
-      className={className}
-      justify={justify}
-      gap={gap}
-      direction={direction}
-      wrap={wrap}
-      alignItems={alignItems}
-      margin={margin}
-      width={props.width!}
-    >
-      {children}
-    </BoxFlexStyle>
-  )
+  } = props */
+  return <BoxFlexStyle {...props}>{children}</BoxFlexStyle>
 }
 
 export default BoxFlex

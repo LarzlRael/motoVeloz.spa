@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react'
-import { Loading } from '../loadings/Loading'
 import { isValidArray } from '../../utils/validation/validation'
 import LoadingWihLogo from '../loadings/LoadingWithLogo'
 

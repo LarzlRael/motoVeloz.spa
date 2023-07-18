@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import useAxios from '../../hooks/useAxios'
 import { StoreResponseInterface } from '../../interfaces/ResponseInterfaces'
@@ -22,17 +22,22 @@ import Swal from 'sweetalert2'
 import NotFound from '../../components/notFound/NotFound'
 import BackIcon from '../../components/boxex/BackIcon'
 import { StoreCardDetail } from '../../components/card/StoreCardDetail'
+import BoxFlex from '../../components/boxex/BoxFlex'
+import { Spacer } from '../../components/boxex/Spacer'
+import { useDocumentTitle } from '../../hooks/useDocumentTitle'
 
 export const EditStore = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [loadingServer, setLoadingServer] = useState(false)
+
   const { response, loading, reload, error } = useAxios<StoreResponseInterface>(
     {
       url: `stores/${id}`,
       method: 'GET',
     },
   )
+  useDocumentTitle(loading ? 'Cargando...' : response!.storeName!!)
 
   async function onSubmit(values: any) {
     setLoadingServer(true)
@@ -97,18 +102,25 @@ export const EditStore = () => {
         <LoadingWihLogo />
       ) : !error ? (
         <div className="EditStore__container">
-          <div className="EditStore__appbar">
-            <H2 color="white" fontWeight="bold" fontSize="1rem">
-              {response.storeName?.toLocaleUpperCase()}
-            </H2>
-            <div>
-              <FaTrashAlt
-                size={25}
-                color="white"
-                className="pointer"
-                onClick={handleDeleteStore}
+          <div className="EditStore__appbar animate__animated animate__fadeIn">
+            <BoxFlex direction="row">
+              <img
+                src={response.imageUrl}
+                className="EditStore__appbar--logo"
+                alt={response.storeName}
               />
-            </div>
+              <H2 color="white" fontWeight="bold" fontSize="1rem">
+                {response.storeName?.toLocaleUpperCase()}
+              </H2>
+            </BoxFlex>
+            <Spacer />
+
+            <FaTrashAlt
+              size={25}
+              color="white"
+              className="pointer"
+              onClick={handleDeleteStore}
+            />
           </div>
           <div
             style={{
@@ -134,11 +146,12 @@ export const EditStore = () => {
           </div>
         </div>
       ) : (
-        <NotFound searchTerm="Esta busqueda"
-        showButtonBack={false}
-        subtitle=''
-        title=''
-         />
+        <NotFound
+          searchTerm="Esta busqueda"
+          showButtonBack={false}
+          subtitle=""
+          title=""
+        />
       )}
     </div>
   )

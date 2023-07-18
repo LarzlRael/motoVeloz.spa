@@ -30,6 +30,7 @@ import { H2 } from '../../components/text'
 import { appLogo } from '../../data/constants'
 import Page404 from '../../components/notFound/Page404'
 import { NavLink } from 'react-router-dom'
+import { Spacer } from '../../components/boxex/Spacer'
 export const AdminDashBoard = () => {
   const [isOpenMenu, setOpenMenu] = useState(false)
 
@@ -52,13 +53,14 @@ export const AdminDashBoard = () => {
       setOpenMenu(true)
     }
   }, [windowSize.width])
+  const [titleDocumento, setTitleDocumento] = useState('Adminstracion')
+  useDocumentTitle(titleDocumento)
 
-  useDocumentTitle('Adminstracion')
-
-  const goToLink = () => {
+  const goToLink = (title: string) => {
     if (windowSize.width < 768) {
       handleToogleMenu()
     }
+    setTitleDocumento(title)
   }
 
   /*   useEffect(() => {
@@ -133,7 +135,7 @@ export const AdminDashBoard = () => {
                 <span className="title-dash">{title_group}</span>
 
                 {items.map(({ to, icon, title }, index) => (
-                  <div onClick={goToLink} key={uuidv4()}>
+                  <div onClick={() => goToLink(title)} key={uuidv4()}>
                     <NavLink
                       to={to}
                       style={{
@@ -165,24 +167,19 @@ export const AdminDashBoard = () => {
               </div>
             ))}
           </div>
-          <div
-            style={{
-              display: 'flex',
-              flexGrow: 1,
-            }}
-          ></div>
+          <Spacer />
 
           <div
             className="AdminDashBoard__dash--group"
             onClick={() => dispatch(logOutSession())}
           >
             <div className="AdminDashBoard__dash--item">
-              <FaPowerOff color="#f44336" size="30" />
+              <FaPowerOff color="white" size="20" />
               <span
                 style={{
                   marginLeft: '10px',
-                  fontWeight: 'bold',
-                  fontSize: '1rem',
+                  fontWeight: '400',
+                  fontSize: '0.9rem',
                   textTransform: 'none',
                 }}
               >

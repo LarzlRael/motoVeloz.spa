@@ -60,7 +60,7 @@ export const ListStore = () => {
       </form> */}
       <FloatingActionButton onClick={() => navigator('/dashboard/crear')} />
       <SearchInput
-        onDebounce={(value) => setQuerySearch(value)}
+        onDebounce={setQuerySearch}
         placeholder="Buscar tienda por nombre"
         callback={reload}
       />

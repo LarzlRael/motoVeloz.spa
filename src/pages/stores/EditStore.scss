@@ -1,7 +1,6 @@
-
 .EditStore__appbar {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 1rem 20px;
   background-color: var(--dash-background);
@@ -12,10 +11,16 @@
   gap: 1rem;
   /* padding: 1rem 20px; */
 }
+.EditStore__appbar--logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 7px;
+  margin-right: 11px;
+}
 .AdminDashBoard__dash--maincontent {
   padding: 0;
 }
-.CreateStore{
+.CreateStore {
   padding: 1rem;
 }
 .CreateStore__form--container {
