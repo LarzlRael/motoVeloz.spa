@@ -7,9 +7,10 @@ import { capitalizeFirstLetter } from '../../utils/utils'
 
 interface StoreCardProps {
   store: StoreResponseInterface
+  selectedItem?: (store: StoreResponseInterface) => void
 }
-export const StoreCard = ({
-  store: {
+export const StoreCard = ({ store, selectedItem }: StoreCardProps) => {
+  const {
     _id,
     imageUrl,
     storeName,
@@ -17,11 +18,12 @@ export const StoreCard = ({
     storeAddress,
     storePhone,
     storeUrl,
-  },
-}: StoreCardProps) => {
-  const navigate = useNavigate()
+  } = store
   function handleGo() {
-    navigate(`/dashboard/editarTienda/${_id}`)
+    /* navigate(`/dashboard/editarTienda/${_id}`) */
+    if (selectedItem) {
+      selectedItem!(store)
+    }
   }
 
   const renderImage = imageUrl
@@ -29,7 +31,10 @@ export const StoreCard = ({
     : 'https://www.abc.net.au/news/image/12000000'
 
   return (
-    <div onClick={handleGo} className="StoreCard pointer animate__animated animate__fadeIn">
+    <div
+      onClick={handleGo}
+      className="StoreCard pointer animate__animated animate__fadeIn"
+    >
       <img
         className="StoreCard__img"
         src={renderImage}

@@ -82,8 +82,8 @@ export const Login = () => {
               name="userName"
               type="text"
               disabled={loading}
+              /* showClearIcon={true} */
             />
-            <br />
             <label className="Form__label--pyme" htmlFor="">
               Contraseña
             </label>

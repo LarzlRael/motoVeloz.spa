@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react'
 import styled from 'styled-components'
-const ButtonStyle = styled.button<any>`
+const ButtonStyle = styled.button<RenderButtonProps>`
   padding: 8px;
   border-radius: 5px;
   font-size: 1.6rem;

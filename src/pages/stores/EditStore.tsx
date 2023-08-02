@@ -141,7 +141,21 @@ export const EditStore = () => {
                 formTitle="Editar negocio"
                 titleButton="Editar"
               />
-              <StoreCardDetail store={response} />
+              <div
+                style={{
+                  width: '300px',
+                  height: '300px',
+                  margin: '0 auto',
+                }}
+              >
+                {/* <StoreCardDetail store={response} /> */}
+                <StoreCard
+                  store={response}
+                  selectedItem={({ storeUrl }) => {
+                    window.open(storeUrl, '_blank')
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

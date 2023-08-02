@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useDebounceValue } from '../../hooks/useDebounceValue'
-import { FaSearch, FaTimes, FaTimesCircle } from 'react-icons/fa'
+import { FaSearch, FaTimesCircle } from 'react-icons/fa'
 import ToolTip from '../boxex/ToolTip'
 
 interface Props {

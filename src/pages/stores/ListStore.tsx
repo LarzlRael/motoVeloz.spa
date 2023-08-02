@@ -4,7 +4,7 @@ import { StoreResponseInterface } from '../../interfaces/ResponseInterfaces'
 
 import { StoreCard } from '../../components/card/StoreCard'
 import './ListStore.scss'
-import { InputHTMLAttributes, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SearchInput } from '../../components/forms/SearchInput'
 import ArrayDataComponent from '../../components/card/ArrayDataComponent'
 import NotFound from '../../components/notFound/NotFound'
@@ -33,9 +33,8 @@ export const ListStore = () => {
   }
 
   return (
-    <div className="ListStore__container">
+    <div className="ListStore__container animate__animated animate__fadeIn">
       <H2
-        className="animate__animated animate__fadeIn"
         textAlign="start"
         fontSize="1.3rem"
         fontWeight="bold"
@@ -58,7 +57,10 @@ export const ListStore = () => {
           </button>
         </div>
       </form> */}
-      <FloatingActionButton onClick={() => navigator('/dashboard/crear')} />
+      <FloatingActionButton
+        onClick={() => navigator('/dashboard/crear')}
+        tooltipTitle="Agregar tienda"
+      />
       <SearchInput
         onDebounce={setQuerySearch}
         placeholder="Buscar tienda por nombre"
@@ -78,7 +80,13 @@ export const ListStore = () => {
         renderComponent={(data) => (
           <div className="ListStore__container--stores">
             {data?.map((res, i) => (
-              <StoreCard store={res} key={i} />
+              <StoreCard
+                store={res}
+                key={i}
+                selectedItem={(store) => {
+                  navigator(`/dashboard/editarTienda/${store._id}`)
+                }}
+              />
             ))}
           </div>
         )}

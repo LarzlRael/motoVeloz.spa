@@ -89,7 +89,7 @@ function DropzoneInput({
               src={URL.createObjectURL(file)}
               alt={file.name}
             />
-            <FaTimes color="red" onClick={() => clearAll()} />
+            <FaTimes color="red" onClick={clearAll} />
             {/* <h5>{Math.round(file.size / 1024)}kb</h5> */}
           </div>
         )

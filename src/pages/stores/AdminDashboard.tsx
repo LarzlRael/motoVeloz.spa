@@ -96,7 +96,7 @@ export const AdminDashBoard = () => {
         <IconContext.Provider
           value={{ className: 'Sidebar__icon1', size: '1rem' }}
         >
-          <div onClick={() => handleToogleMenu()}>
+          <div onClick={handleToogleMenu}>
             {isOpenMenu ? <FaTimes /> : <FaBars />}
           </div>
         </IconContext.Provider>
@@ -133,7 +133,6 @@ export const AdminDashBoard = () => {
             {accountsLink.map(({ title_group, items }) => (
               <div key={uuidv4()}>
                 <span className="title-dash">{title_group}</span>
-
                 {items.map(({ to, icon, title }, index) => (
                   <div onClick={() => goToLink(title)} key={uuidv4()}>
                     <NavLink
