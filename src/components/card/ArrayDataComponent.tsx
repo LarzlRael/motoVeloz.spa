@@ -17,8 +17,6 @@ function ArrayDataComponent<T>({
   loading = false,
   initialData,
 }: ArrayDataComponentProps<T>): ReactElement {
-  console.log(initialData)
-
   if (loading) {
     return <LoadingWihLogo />
   }

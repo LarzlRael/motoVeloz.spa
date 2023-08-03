@@ -53,14 +53,13 @@ export const AdminDashBoard = () => {
       setOpenMenu(true)
     }
   }, [windowSize.width])
-  const [titleDocumento, setTitleDocumento] = useState('Adminstracion')
-  useDocumentTitle(titleDocumento)
+
+  useDocumentTitle('Adminstracion')
 
   const goToLink = (title: string) => {
     if (windowSize.width < 768) {
       handleToogleMenu()
     }
-    setTitleDocumento(title)
   }
 
   /*   useEffect(() => {
