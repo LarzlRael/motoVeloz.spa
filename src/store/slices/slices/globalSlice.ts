@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-interface indicatorInterface {
-  titleIndicator: string
-  urlImageIndicator: string
-}
+
 interface modalReducerInterface {
   status: boolean
   title: string
@@ -10,11 +7,12 @@ interface modalReducerInterface {
   butttonText: string
   onClick: (() => void) | null | undefined
   width?: string | null | undefined
+  searchedResult?: any[] | null
 }
 interface GlobalState {
-  indicator: indicatorInterface
   modalReducer: modalReducerInterface
   snackbarReducer: snackbarReducerInterface
+  searchedResult?: any[]
 }
 interface snackbarReducerInterface {
   open: boolean
@@ -23,11 +21,6 @@ interface snackbarReducerInterface {
 }
 
 const initialState: GlobalState = {
-  indicator: {
-    titleIndicator: 'title',
-    urlImageIndicator:
-      'https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171__340.jpg',
-  },
   modalReducer: {
     status: false,
     title: '',
@@ -35,6 +28,7 @@ const initialState: GlobalState = {
     butttonText: '',
     onClick: null,
     width: null,
+    searchedResult: null,
   },
   snackbarReducer: {
     open: false,
@@ -47,9 +41,6 @@ export const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
-    changeIndicator: (state, action: PayloadAction<indicatorInterface>) => {
-      localStorage.setItem('indicator', JSON.stringify(action.payload))
-    },
     changeModal: (state, action: PayloadAction<modalReducerInterface>) => {
       state.modalReducer = {
         butttonText: action.payload.butttonText,
@@ -58,6 +49,9 @@ export const globalSlice = createSlice({
         status: action.payload.status,
         title: action.payload.title,
       }
+    },
+    changeResult: (state, action: PayloadAction<any[]>) => {
+      state.searchedResult = action.payload
     },
     openSnackbar: (state, action: PayloadAction<snackbarReducerInterface>) => {
       state.snackbarReducer = {
@@ -71,7 +65,7 @@ export const globalSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-  changeIndicator,
+  changeResult,
   changeModal,
   openSnackbar,
 } = globalSlice.actions

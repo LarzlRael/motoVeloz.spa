@@ -8,12 +8,19 @@ import { useEffect, useState } from 'react'
 import { SearchInput } from '../../components/forms/SearchInput'
 import ArrayDataComponent from '../../components/card/ArrayDataComponent'
 import NotFound from '../../components/notFound/NotFound'
-import { FaSearch } from 'react-icons/fa'
 import { H2 } from '../../components/text'
 import { FloatingActionButton } from '../../components/Buttons/FloatingActionButton'
-import { useNavigate, useNavigation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../store/store'
+import { changeResult } from '../../store/slices/slices/globalSlice'
+
 export const ListStore = () => {
   const navigator = useNavigate()
+  const dispatch = useDispatch()
+
+  const { searchedResult } = useSelector((state: RootState) => state.global)
+
   const [querySearch, setQuerySearch] = useState('')
   const { response, loading, reload } = useAxios<StoreResponseInterface[]>({
     url:
@@ -25,7 +32,8 @@ export const ListStore = () => {
 
   useEffect(() => {
     reload()
-  }, [querySearch])
+    dispatch(changeResult(response))
+  }, [querySearch]) 
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -69,6 +77,7 @@ export const ListStore = () => {
       <ArrayDataComponent
         data={response}
         loading={loading}
+        initialData={searchedResult}
         noResultsComponent={
           <NotFound
             searchTerm={querySearch}

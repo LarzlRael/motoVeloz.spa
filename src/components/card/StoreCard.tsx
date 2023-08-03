@@ -1,8 +1,7 @@
 import './StoreCard.scss'
-import React from 'react'
+
 import { StoreResponseInterface } from '../../interfaces/ResponseInterfaces'
 import { P } from '../text/P'
-import { useNavigate } from 'react-router-dom'
 import { capitalizeFirstLetter } from '../../utils/utils'
 
 interface StoreCardProps {

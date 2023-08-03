@@ -88,7 +88,7 @@ export const PushNotifications = () => {
                   { key: 'body', name: 'Contenido de la notificación' },
 
                   { key: 'createdAt', name: 'Creado en ', type: 'date' },
-                  /* { key: 'imageUrl', name: 'Creado en ', type: 'img' }, */
+                  { key: 'imageUrl', name: 'Imagen ', type: 'img' },
                   {
                     key: 'action',
                     name: 'Acciones',

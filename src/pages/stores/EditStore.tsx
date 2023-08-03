@@ -138,7 +138,7 @@ export const EditStore = () => {
                 inputJson={storeAddOrEditForm}
                 onSubmit={onSubmit}
                 loading={loadingServer}
-                formTitle="Editar negocio"
+                formTitle="Editar informacion de la tienda"
                 titleButton="Editar"
               />
               <div
