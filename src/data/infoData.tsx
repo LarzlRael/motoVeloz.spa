@@ -92,14 +92,14 @@ export const accountsLink: AccountsLinkInterface[] = [
     title_group: 'Tiendas',
     items: [
       {
-        title: 'Agregar tienda',
-        to: '/dashboard/crear',
-        icon: <BsHouseAddFill size={25} />,
-      },
-      {
         title: 'Todas las tiendas',
         to: '/dashboard/listar',
         icon: <BiStoreAlt size={25} />,
+      },
+      {
+        title: 'Agregar tienda',
+        to: '/dashboard/crear',
+        icon: <BsHouseAddFill size={25} />,
       },
     ],
   },

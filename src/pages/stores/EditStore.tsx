@@ -132,7 +132,12 @@ export const EditStore = () => {
                 navigate(-1)
               }}
             />
-            <div className="EditStore__form--container animate__animated animate__fadeIn">
+            <BoxFlex
+              direction="row"
+              directionMobile="column"
+              alignItems="flex-start"
+              className="animate__animated animate__fadeIn"
+            >
               <GlobalForm
                 data={response}
                 inputJson={storeAddOrEditForm}
@@ -156,7 +161,7 @@ export const EditStore = () => {
                   }}
                 />
               </div>
-            </div>
+            </BoxFlex>
           </div>
         </div>
       ) : (

@@ -99,15 +99,7 @@ export const AdminDashBoard = () => {
             {isOpenMenu ? <FaTimes /> : <FaBars />}
           </div>
         </IconContext.Provider>
-        <img
-          src={appLogo}
-          style={{
-            margin: '0 0 0 0.5rem',
-            width: '2.5rem',
-            height: '2.5rem',
-            borderRadius: '5px',
-          }}
-        />
+
         <H2
           margin="0 0 0 0.5rem"
           color="white"

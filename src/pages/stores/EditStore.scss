@@ -5,12 +5,12 @@
   padding: 1rem 20px;
   background-color: var(--dash-background);
 }
-.EditStore__form--container {
+/* .EditStore__form--container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  /* padding: 1rem 20px; */
-}
+} */
+/* padding: 1rem 20px; */
 .EditStore__appbar--logo {
   width: 45px;
   height: 45px;
@@ -30,15 +30,14 @@
 
 @media (max-width: 420px) {
   .CreateStore__form--container {
-    padding: 0 1rem;
     width: 100%;
     margin: 0 auto;
   }
-  .EditStore__container {
+  /*  .EditStore__container {
     width: 100%;
     margin: 0 auto;
   }
   .EditStore__form--container {
     grid-template-columns: 1fr;
-  }
+  } */
 }

@@ -9,7 +9,8 @@ const BoxFlexStyle = styled.div<BoxFlexI>`
   flex-direction: ${(props) => props.direction};
   width: ${(props) => props.width};
   @media screen and (max-width: 425px) {
-    flex-direction: ${(props) => props.direction};
+    flex-direction: ${({ directionMobile, direction }) =>
+      directionMobile ? directionMobile : direction};
     gap: 5px;
     align-items: ${(props) => (props.alignItems ? props.alignItems : 'center')};
   }
@@ -32,6 +33,7 @@ interface BoxFlexI {
   alignItems?: 'center' | 'flex-start' | 'flex-end' | 'stretch' | 'baseline'
   width?: string
   style?: React.CSSProperties
+  directionMobile?: 'column' | 'row'
 }
 const BoxFlex = ({ children, ...props }: BoxFlexI) => {
   /* const {
@@ -46,7 +48,11 @@ const BoxFlex = ({ children, ...props }: BoxFlexI) => {
     width,
     style,
   } = props */
-  return <BoxFlexStyle {...props}>{children}</BoxFlexStyle>
+  return (
+    <BoxFlexStyle className={props.className} {...props}>
+      {children}
+    </BoxFlexStyle>
+  )
 }
 
 export default BoxFlex

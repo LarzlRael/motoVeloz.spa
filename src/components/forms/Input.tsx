@@ -33,6 +33,7 @@ export const Input = ({ label, type, showClearIcon, ...props }: Props) => {
           type={type !== 'password' ? type : check.typeInput}
           {...field}
           {...props}
+
         />
         {showClearIcon && field.value.length > 0 && (
           <FaTimesCircle
